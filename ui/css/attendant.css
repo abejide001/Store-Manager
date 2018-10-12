@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css?family=Charmonman|Roboto|K2D");
+/* product area */
+
+#product-area {
+  min-height: 600px;
+  font-family: "K2D", sans-serif;
+}
+
+#product-area h2 {
+  text-align: center;
+  font-size: 40px;
+}
+
+.product {
+  float: left;
+  width: 30%;
+  padding: 10px;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid gray;
+}
+
+.product-image {
+  height: 150px;
+  cursor: pointer;
+  transition: all 1s ease;
+}
+
+.product-name,
+.product-price {
+  font-weight: bold;
+}
+
+.product-image:hover {
+  transform: scale(1.2);
+}
+
+.product-button {
+  background: gray;
+  height: 30px;
+  padding: 1rem 2rem;
+  color: white;
+  border: 0px;
+  cursor: pointer;
+  outline: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.product-button:hover {
+  background: white;
+  color: black;
+}
+
+.cart-section {
+  min-height: 300px;
+}
+
+#cart-title {
+  text-align: center;
+  font-size: 40px;
+  font-family: "K2D", sans-serif;
+}
+
+/* cart area */
+
+.cart-header {
+  font-weight: bold;
+  font-size: 1.25em;
+  color: #333;
+}
+
+.cart-column {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+  margin: 10px 1.5em 0px 0px;
+  padding-bottom: 10px;
+  font-family: "K2D", sans-serif;
+}
+
+.cart-row {
+  display: flex;
+}
+
+.cart-item {
+  width: 45%;
+}
+
+.cart-price {
+  width: 20%;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.cart-quantity {
+  width: 35%;
+}
+
+.cart-item-title {
+  color: #333;
+  margin-left: 0.5em;
+  font-size: 1.2em;
+}
+
+.cart-item-image {
+  width: 75px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.btn-danger {
+  height: 30px;
+  background: red;
+  padding: 5px;
+  margin: 12px 0px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  outline: none;
+  color: white;
+  font-family: "K2D", sans-serif;
+}
+
+.cart-quantity-input {
+  height: 34px;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid #56ccf2;
+  background-color: #eee;
+  color: #333;
+  padding: 0;
+  text-align: center;
+  font-size: 1.2em;
+  margin-right: 25px;
+}
+
+.cart-row:last-child {
+  border-bottom: 1px solid black;
+}
+
+.cart-row:last-child .cart-column {
+  border: none;
+}
+
+.cart-total {
+  text-align: end;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.cart-total-title {
+  font-weight: bold;
+  font-size: 1.5em;
+  font-family: "K2D", sans-serif;
+  color: black;
+  margin-right: 20px;
+}
+
+.cart-total-price {
+  color: #333;
+  font-size: 20px;
+  font-family: "K2D", sans-serif;
+}
+
+.purchase-button {
+  display: block;
+  margin: 40px auto 80px auto;
+  background: gray;
+  height: 30px;
+  padding: 1rem 2rem;
+  color: white;
+  border: 0px;
+  cursor: pointer;
+  outline: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .products .product {
+    float: none;
+    width: 100%;
+    border: none;
+  }
+  .cart-section {
+    width: 100%;
+    float: none;
+    text-align: center;
+  }
+}
