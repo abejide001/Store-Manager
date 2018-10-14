@@ -3,4 +3,4 @@ node_js:
   - "9.6.1"
 script: bash -x test.sh
 after_success:
-  - npm run coveralls
+  - cd _build && npm run coveralls
