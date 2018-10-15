@@ -1,5 +1,4 @@
 import express from 'express';
-import 'babel-polyfill';
 import product from './server/routes/product-routes';
 
 const app = express();
