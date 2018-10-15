@@ -17,5 +17,9 @@ class Product {
   findAll() {
     return this.products;
   }
+
+  findOne(id) {
+    return this.products.find(product => product.id === Number(id));
+  }
 }
 export default new Product();
