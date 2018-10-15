@@ -21,5 +21,14 @@ class Product {
   findOne(id) {
     return this.products.find(product => product.id === Number(id));
   }
+
+  create(data) {
+    const { name, price, quantityInInventory } = data;
+    const newProduct = {
+      id: this.products.length + 1, name, price, quantityInInventory,
+    };
+    this.products.push(newProduct);
+    return newProduct;
+  }
 }
 export default new Product();
