@@ -33,3 +33,27 @@ describe('GET /sales/:id', () => {
       });
   });
 });
+describe('POST /sales', () => {
+  it('should return 400, if empty input is passed', (done) => {
+    chai.request(server)
+      .post('/api/v1/sales')
+      .send({})
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        done(err);
+      });
+  });
+  it('should return an object if valid input is passed', (done) => {
+    chai.request(server)
+      .post('/api/v1/sales')
+      .send({
+        id: 1,
+        productName: 'nike jordan',
+        quantitySold: 2,
+      })
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        done(err);
+      });
+  });
+});
