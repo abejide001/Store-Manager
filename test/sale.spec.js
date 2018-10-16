@@ -15,3 +15,21 @@ describe('GET /sales', () => {
       });
   });
 });
+describe('GET /sales/:id', () => {
+  it('should return 404 if id is invalid', (done) => {
+    chai.request(server)
+      .get(`/api/v1/sales/${10}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        done(err);
+      });
+  });
+  it('should return a sale record if id is valid', (done) => {
+    chai.request(server)
+      .get(`/api/v1/sales/${1}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        done(err);
+      });
+  });
+});
