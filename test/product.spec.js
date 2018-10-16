@@ -1,13 +1,12 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import product from '../server/routes/product-routes';
 import server from '../index';
 
 chai.use(chaiHttp);
-const should = chai.should();
+const should = chai.should(); // eslint-disable-line
 const { expect } = chai;
 describe('GET /products', () => {
-  it('should return 200', (done) => {
+  it('should get all products', (done) => {
     chai.request(server)
       .get('/api/v1/products')
       .end((err, res) => {
@@ -25,12 +24,37 @@ describe('GET /products/:id', () => {
         done(err);
       });
   });
-  it('should be an object', (done) => {
+  it('should return a product if id is valid', (done) => {
     chai.request(server)
       .get(`/api/v1/products/${1}`)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         done(err);
+      });
+  });
+});
+describe('POST /products', () => {
+  it('should return 400 if empty input is passed', (done) => {
+    chai.request(server)
+      .post('/api/v1/products')
+      .send({})
+      .end((err, res) => {
+        res.should.have.status(400);
+        done(err);
+      });
+  });
+  it('should return an object if valid input is passed', (done) => {
+    chai.request(server)
+      .post('/api/v1/products')
+      .send({
+        id: 1,
+        name: 'air max',
+        price: 10000,
+        quantityInInventory: 3,
+      })
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        done();
       });
   });
 });
