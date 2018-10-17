@@ -6,8 +6,12 @@
   "scripts": {
     "test": "mocha",
     "dev-start": "babel-watch index.js",
+    "start": "babel-watch index.js",
     "cover": "istanbul cover _mocha",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "engines": {
+      "node": "9.6.1"
+    }
   },
   "repository": {
     "type": "git",
