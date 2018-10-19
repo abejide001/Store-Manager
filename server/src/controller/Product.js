@@ -1,14 +1,5 @@
-import Joi from 'joi';
 import ProductModel from '../models/Product';
 
-function validate(product) {
-  const schema = {
-    name: Joi.string().required().min(5).max(15),
-    price: Joi.number().required().min(4).max(2000),
-    quantityInInventory: Joi.number().required().min(1).max(10),
-  };
-  return Joi.validate(product, schema);
-}
 const Product = {
   getAll(req, res) {
     const products = ProductModel.findAll();
@@ -23,7 +14,7 @@ const Product = {
     return res.send(product);
   },
   create(req, res) {
-    const { error } = validate(req.body);
+    const { error } = ProductModel.validate(req.body);
     if (error) {
       res.status(400).send(error.details[0].message);
       return;

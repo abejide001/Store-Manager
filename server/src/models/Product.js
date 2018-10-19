@@ -1,3 +1,5 @@
+import Joi from 'joi';
+
 class Product {
   constructor() {
     this.products = [{
@@ -12,6 +14,15 @@ class Product {
       price: 10000,
       quantityInInventory: 3,
     }];
+  }
+
+  validate(sale) {
+    this.schema = {
+      name: Joi.string().required().min(5).max(15),
+      price: Joi.number().required().min(1000),
+      quantityInInventory: Joi.number().required().min(1).max(10),
+    };
+    return Joi.validate(sale, this.schema);
   }
 
   findAll() {
