@@ -1,6 +1,6 @@
 language: "node_js"
 node_js:
   - "9.6.1"
-script: bash -x test.sh
+script: npm test
 after_success:
-  - cd _build && npm run coveralls
+  - npm run coveralls

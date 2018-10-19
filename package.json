@@ -4,11 +4,15 @@
   "description": "Store Manager is a web application that helps store owners manage sales and product inventory records. This application is meant for use in a single store",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "pretest": "npm install && babel --ignore node_modules,_build,package* . --out-dir _build && cp -R node_modules _build && cp package* _build",
+    "prestart": "npm install && babel --ignore node_modules,_build,package* . --out-dir _build && cp -R node_modules _build && cp package* _build",
+    "predev-start": "npm install && babel --ignore node_modules,_build,package* . --out-dir _build && cp -R node_modules _build && cp package* _build",
+    "precoveralls": "npm install && babel --ignore node_modules,_build,package* . --out-dir _build && cp -R node_modules _build && cp package* _build",
+    "test": "cd _build && mocha -w",
     "dev-start": "babel-watch index.js",
     "start": "node ./_build/index.js",
     "cover": "istanbul cover _mocha",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "cd _build && npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "engines": {
       "node": "9.6.1"
     }
