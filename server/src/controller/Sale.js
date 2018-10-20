@@ -1,13 +1,5 @@
-// import Joi from 'joi';
 import SaleModel from '../models/Sale';
 
-// function validate(sale) {
-//   const schema = {
-//     productName: Joi.string().required().min(5).max(15),
-//     quantitySold: Joi.number().required().min(1).max(10),
-//   };
-//   return Joi.validate(sale, schema);
-// }
 const Sale = {
   getAll(req, res) {
     const sales = SaleModel.findAll();
