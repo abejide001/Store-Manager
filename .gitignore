@@ -1,3 +1,3 @@
 node_modules
-_build
+_build/
 .coveralls.yml
