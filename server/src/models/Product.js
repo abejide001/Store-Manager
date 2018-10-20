@@ -38,8 +38,12 @@ class Product {
     const newProduct = {
       id: this.products.length + 1, name, price, quantityInInventory,
     };
+    const product = this.validate(newProduct);
+    if (product.error) {
+      return product;
+    }
     this.products.push(newProduct);
-    return newProduct;
+    return { product: newProduct };
   }
 }
 export default new Product();

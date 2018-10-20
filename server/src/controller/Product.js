@@ -14,13 +14,12 @@ const Product = {
     return res.send(product);
   },
   create(req, res) {
-    const { error } = ProductModel.validate(req.body);
-    if (error) {
-      res.status(400).send(error.details[0].message);
+    const newProduct = ProductModel.create(req.body);
+    if (newProduct.error) {
+      res.status(400).send(newProduct.error.message);
       return;
     }
-    const product = ProductModel.create(req.body);
-    res.status(201).send(product);
+    res.status(201).send(newProduct);
   },
 };
 export default Product;
