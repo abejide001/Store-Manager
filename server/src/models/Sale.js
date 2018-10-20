@@ -25,17 +25,14 @@ class Sale {
     return this.sales.find(sale => sale.id === Number(id));
   }
 
-  create(data) {
-    const { productName, quantitySold } = data;
-    const newSale = {
-      id: this.sales.length + 1, productName, quantitySold,
-    };
-    const sale = this.validate(newSale);
-    if (sale.error) {
-      return sale;
+  create(sale) {
+    const validated = this.validate(sale);
+    if (validated.error) {
+      return validated;
     }
-    this.sales.push(newSale);
-    return newSale;
+    sale.id = this.sales.length + 1;
+    this.sales.push(sale);
+    return sale;
   }
 }
 export default new Sale();
