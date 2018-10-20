@@ -47,12 +47,14 @@ describe('POST /sales', () => {
     chai.request(server)
       .post('/api/v1/sales')
       .send({
-        id: 1,
         productName: 'nike jordan',
         quantitySold: 2,
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(201);
+        expect(res.body.productName).to.equal('nike jordan');
+        expect(res.body.quantitySold).to.equal(2);
         done(err);
       });
   });
