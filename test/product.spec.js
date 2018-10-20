@@ -49,7 +49,7 @@ describe('POST /products', () => {
       .send({
         id: 1,
         name: 'air max',
-        price: 10000,
+        price: 1000,
         quantityInInventory: 3,
       })
       .end((err, res) => {
