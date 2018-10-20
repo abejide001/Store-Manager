@@ -14,13 +14,12 @@ const Sale = {
     return res.send(sale);
   },
   create(req, res) {
-    const { error } = SaleModel.validate(req.body);
-    if (error) {
-      res.status(400).send(error.details[0].message);
+    const newSale = SaleModel.create(req.body);
+    if (newSale.error) {
+      res.status(400).send(newSale.error.message);
       return;
     }
-    const sale = SaleModel.create(req.body);
-    res.status(201).send(sale);
+    res.status(201).send(newSale);
   },
 };
 export default Sale;

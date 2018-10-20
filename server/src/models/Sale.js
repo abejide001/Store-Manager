@@ -30,6 +30,10 @@ class Sale {
     const newSale = {
       id: this.sales.length + 1, productName, quantitySold,
     };
+    const sale = this.validate(newSale);
+    if (sale.error) {
+      return sale;
+    }
     this.sales.push(newSale);
     return newSale;
   }
