@@ -33,17 +33,14 @@ class Product {
     return this.products.find(product => product.id === Number(id));
   }
 
-  create(data) {
-    const { name, price, quantityInInventory } = data;
-    const newProduct = {
-      id: this.products.length + 1, name, price, quantityInInventory,
-    };
-    const product = this.validate(newProduct);
-    if (product.error) {
-      return product;
+  create(product) {
+    const validated = this.validate(product);
+    if (validated.error) {
+      return validated;
     }
-    this.products.push(newProduct);
-    return { product: newProduct };
+    product.id = this.products.length + 1;
+    this.products.push(product);
+    return product;
   }
 }
 export default new Product();
