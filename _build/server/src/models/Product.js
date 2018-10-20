@@ -55,16 +55,14 @@ var Product = function () {
     }
   }, {
     key: 'create',
-    value: function create(data) {
-      var name = data.name,
-          price = data.price,
-          quantityInInventory = data.quantityInInventory;
-
-      var newProduct = {
-        id: this.products.length + 1, name: name, price: price, quantityInInventory: quantityInInventory
-      };
-      this.products.push(newProduct);
-      return newProduct;
+    value: function create(product) {
+      var validated = this.validate(product);
+      if (validated.error) {
+        return validated;
+      }
+      product.id = this.products.length + 1;
+      this.products.push(product);
+      return product;
     }
   }]);
 

@@ -48,15 +48,14 @@ var Sale = function () {
     }
   }, {
     key: 'create',
-    value: function create(data) {
-      var productName = data.productName,
-          quantitySold = data.quantitySold;
-
-      var newSale = {
-        id: this.sales.length + 1, productName: productName, quantitySold: quantitySold
-      };
-      this.sales.push(newSale);
-      return newSale;
+    value: function create(sale) {
+      var validated = this.validate(sale);
+      if (validated.error) {
+        return validated;
+      }
+      sale.id = this.sales.length + 1;
+      this.sales.push(sale);
+      return sale;
     }
   }]);
 

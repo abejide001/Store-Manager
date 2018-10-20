@@ -25,15 +25,12 @@ var Sale = {
     return res.send(sale);
   },
   create: function create(req, res) {
-    var _SaleModel$validate = _Sale2.default.validate(req.body),
-        error = _SaleModel$validate.error;
-
-    if (error) {
-      res.status(400).send(error.details[0].message);
+    var newSale = _Sale2.default.create(req.body);
+    if (newSale.error) {
+      res.status(400).send(newSale.error.message);
       return;
     }
-    var sale = _Sale2.default.create(req.body);
-    res.status(201).send(sale);
+    res.status(201).send(newSale);
   }
 };
 exports.default = Sale;

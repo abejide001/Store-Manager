@@ -25,15 +25,12 @@ var Product = {
     return res.send(product);
   },
   create: function create(req, res) {
-    var _ProductModel$validat = _Product2.default.validate(req.body),
-        error = _ProductModel$validat.error;
-
-    if (error) {
-      res.status(400).send(error.details[0].message);
+    var newProduct = _Product2.default.create(req.body);
+    if (newProduct.error) {
+      res.status(400).send(newProduct.error.message);
       return;
     }
-    var product = _Product2.default.create(req.body);
-    res.status(201).send(product);
+    res.status(201).send(newProduct);
   }
 };
 exports.default = Product;
