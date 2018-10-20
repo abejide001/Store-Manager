@@ -47,13 +47,17 @@ describe('POST /products', () => {
     chai.request(server)
       .post('/api/v1/products')
       .send({
-        id: 1,
         name: 'air max',
         price: 1000,
         quantityInInventory: 3,
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
+        res.should.have.status(201);
+        expect(res.body).to.exist;
+        expect(res.body.name).to.equal('air max');
+        expect(res.body.price).to.equal(1000);
+        expect(res.body.quantityInInventory).to.equal(3);
         done();
       });
   });
