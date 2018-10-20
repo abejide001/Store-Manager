@@ -5,13 +5,13 @@ class Product {
     this.products = [{
       id: 1,
       name: 'air max',
-      price: 10000,
+      price: 1000,
       quantityInInventory: 2,
     },
     {
       id: 2,
       name: 'nike air',
-      price: 10000,
+      price: 1000,
       quantityInInventory: 3,
     }];
   }
