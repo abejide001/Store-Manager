@@ -13,6 +13,7 @@
     "start": "node ./_build/index.js",
     "cover": "istanbul cover _mocha",
     "coveralls": "cd _build && npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "posttest": "eslint --ignore-pattern _build .",
     "engines": {
       "node": "9.6.1"
     }

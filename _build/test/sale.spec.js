@@ -22,6 +22,7 @@ describe('GET /sales', function () {
   it('should return all sales records', function (done) {
     _chai2.default.request(_index2.default).get('/api/v1/sales').end(function (err, res) {
       expect(res.status).to.equal(200);
+      expect(res.body).to.not.be.empty;
       done(err);
     });
   });
@@ -36,6 +37,7 @@ describe('GET /sales/:id', function () {
   it('should return a sale record if id is valid', function (done) {
     _chai2.default.request(_index2.default).get('/api/v1/sales/' + 1).end(function (err, res) {
       expect(res.status).to.equal(200);
+      expect(res.body).to.not.be.empty;
       done(err);
     });
   });
@@ -44,6 +46,7 @@ describe('POST /sales', function () {
   it('should return 400, if empty input is passed', function (done) {
     _chai2.default.request(_index2.default).post('/api/v1/sales').send({}).end(function (err, res) {
       expect(res.status).to.equal(400);
+      expect(res.body).to.be.empty;
       done(err);
     });
   });

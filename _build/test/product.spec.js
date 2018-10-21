@@ -30,12 +30,14 @@ describe('GET /products/:id', function () {
   it('should return 404 if an invalid id is passed', function (done) {
     _chai2.default.request(_index2.default).get('/api/v1/products/' + 9).end(function (err, res) {
       res.should.have.status(404);
+      expect(res.body.message).to.equal('product not found');
       done(err);
     });
   });
   it('should return a product if id is valid', function (done) {
     _chai2.default.request(_index2.default).get('/api/v1/products/' + 1).end(function (err, res) {
       expect(res.body).to.be.an('object');
+      expect(res.status).to.equal(200);
       done(err);
     });
   });
