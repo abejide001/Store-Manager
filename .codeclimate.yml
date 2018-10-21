@@ -1,1 +1,2 @@
-_build/
+exclude_patterns: 
+  - "_build"
