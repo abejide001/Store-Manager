@@ -33,6 +33,26 @@ describe('Sale Model', () => {
     expect(sale.error.details[0].message).to.equal('"productName" length must be at least 5 characters long');
     done();
   });
+  it('should return errors if quantity sold is lower than one', (done) => {
+    const sale = SaleModel.validate({
+      productName: 'nike air',
+      quantitySold: 0,
+    });
+    expect(sale.error).to.exist;
+    expect(sale.error.details.length).to.equal(1);
+    expect(sale.error.details[0].message).to.equal('"quantitySold" must be larger than or equal to 1');
+    done();
+  });
+  it('should return errors if quantity sold is greater than 10', (done) => {
+    const sale = SaleModel.validate({
+      productName: 'nike air',
+      quantitySold: 11,
+    });
+    expect(sale.error).to.exist;
+    expect(sale.error.details.length).to.equal(1);
+    expect(sale.error.details[0].message).to.equal('"quantitySold" must be less than or equal to 10');
+    done();
+  });
   it('should return errors for an sale with invalid field "id"', (done) => {
     const sale = SaleModel.validate({
       id: 7,
