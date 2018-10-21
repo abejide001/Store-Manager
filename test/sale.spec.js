@@ -11,6 +11,7 @@ describe('GET /sales', () => {
       .get('/api/v1/sales')
       .end((err, res) => {
         expect(res.status).to.equal(200);
+        expect(res.body).to.not.be.empty;
         done(err);
       });
   });
@@ -29,6 +30,7 @@ describe('GET /sales/:id', () => {
       .get(`/api/v1/sales/${1}`)
       .end((err, res) => {
         expect(res.status).to.equal(200);
+        expect(res.body).to.not.be.empty;
         done(err);
       });
   });
@@ -40,6 +42,7 @@ describe('POST /sales', () => {
       .send({})
       .end((err, res) => {
         expect(res.status).to.equal(400);
+        expect(res.body).to.be.empty;
         done(err);
       });
   });
