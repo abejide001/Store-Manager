@@ -18,7 +18,7 @@ describe('GET /products', () => {
 describe('GET /products/:id', () => {
   it('should return 404 if an invalid id is passed', (done) => {
     chai.request(server)
-      .get(`/api/v1/products/${9}`)
+      .get('/api/v1/products/9')
       .end((err, res) => {
         res.should.have.status(404);
         expect(res.body.message).to.equal('product not found');
@@ -27,7 +27,7 @@ describe('GET /products/:id', () => {
   });
   it('should return a product if id is valid', (done) => {
     chai.request(server)
-      .get(`/api/v1/products/${1}`)
+      .get('/api/v1/products/1')
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(200);
@@ -54,12 +54,7 @@ describe('POST /products', () => {
         quantityInInventory: 3,
       })
       .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        res.should.have.status(201);
-        expect(res.body).to.exist;
-        expect(res.body.name).to.equal('air max');
-        expect(res.body.price).to.equal(1000);
-        expect(res.body.quantityInInventory).to.equal(3);
+        expect(res.status).to.equal(201);
         done();
       });
   });
