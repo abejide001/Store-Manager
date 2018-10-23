@@ -1,11 +1,11 @@
 import SaleModel from '../models/Sale';
 
 const Sale = {
-  getAll(req, res) {
+  getAllSales(req, res) {
     const sales = SaleModel.findAll();
-    return res.send(sales);
+    return res.status(200).send(sales);
   },
-  getOne(req, res) {
+  getOneSale(req, res) {
     const { id } = req.params;
     const sale = SaleModel.findOne(id);
     if (!sale) {
@@ -13,13 +13,16 @@ const Sale = {
     }
     return res.send(sale);
   },
-  create(req, res) {
+  createSales(req, res) {
     const newSale = SaleModel.create(req.body);
-    if (newSale.error) {
-      res.status(400).send(newSale.error.message);
+    if (newSale.errors.length !== 0) {
+      res.status(400).send(newSale);
       return;
     }
-    res.status(201).send(newSale);
+    res.status(201).send({
+      message: 'sale created',
+      newSale,
+    });
   },
 };
 export default Sale;
