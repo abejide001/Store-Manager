@@ -1,11 +1,11 @@
 import ProductModel from '../models/Product';
 
 const Product = {
-  getAll(req, res) {
+  getAllProducts(req, res) {
     const products = ProductModel.findAll();
-    return res.send(products);
+    return res.status(200).send(products);
   },
-  getOne(req, res) {
+  getOneProduct(req, res) {
     const { id } = req.params;
     const product = ProductModel.findOne(id);
     if (!product) {
@@ -13,13 +13,16 @@ const Product = {
     }
     return res.send(product);
   },
-  create(req, res) {
+  createProducts(req, res) {
     const newProduct = ProductModel.create(req.body);
-    if (newProduct.error) {
-      res.status(400).send(newProduct.error.message);
+    if (newProduct.errors.length !== 0) {
+      res.status(400).send(newProduct);
       return;
     }
-    res.status(201).send(newProduct);
+    res.status(201).send({
+      message: 'product created',
+      newProduct,
+    });
   },
 };
 export default Product;
