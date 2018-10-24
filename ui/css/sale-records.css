@@ -3,8 +3,6 @@
 
 #records {
   min-height: 510px;
-  background: url("../images/record-background.jpeg") no-repeat left;
-  background-size: cover;
 }
 
 #record-title h1 {
