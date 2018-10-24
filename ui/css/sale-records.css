@@ -4,7 +4,9 @@
 #records {
   min-height: 510px;
 }
-
+#record-table {
+  overflow-x: auto;
+}
 #record-title h1 {
   text-align: center;
   font: normal bold 45px "K2D", sans-serif;
@@ -14,7 +16,8 @@ table {
   text-align: center;
   width: 900px;
   margin: auto;
-  table-layout: fixed;
+  /* table-layout: fixed; */
+  overflow-x: auto;  
 }
 
 table,
