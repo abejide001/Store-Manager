@@ -64,10 +64,21 @@
     text-transform: uppercase;
     padding: 0px;
 }
-@media (max-width: 768px) {
+@media (max-width: 879px) {
     .products .product-item {
        float: none;
        width: 100%;
        border: none;
+    }
+    header #header-title,
+    header nav,
+    header nav li {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    header a {
+        text-align: center;
+        font-size: 17px;
     }
   }

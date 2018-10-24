@@ -37,7 +37,6 @@
 
 .product-button {
   background: gray;
-  height: 30px;
   padding: 1rem 2rem;
   color: white;
   border: 0px;
@@ -45,11 +44,6 @@
   outline: none;
   font-size: 12px;
   font-weight: bold;
-}
-
-.product-button:hover {
-  background: white;
-  color: black;
 }
 
 .cart-section {
@@ -167,7 +161,7 @@
   display: block;
   margin: 40px auto 80px auto;
   background: gray;
-  height: 30px;
+  /* height: 30px; */
   padding: 1rem 2rem;
   color: white;
   border: 0px;
@@ -177,7 +171,7 @@
   font-weight: bold;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 348px) {
   .products .product {
     float: none;
     width: 100%;
@@ -188,4 +182,25 @@
     float: none;
     text-align: center;
   }
+  .cart-row {
+    overflow: auto;
+  }
+}
+@media (max-width: 898px) {
+  .product {
+    float: none;
+    width: 100%;
+    border: none;
+  }
+  header #header-title,
+    header nav,
+    header nav li {
+      float: none;
+      width: 100%;
+      text-align: center;
+    }
+    header a {
+      text-align: center;
+      font-size: 17px;
+    }
 }
