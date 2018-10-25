@@ -33,7 +33,6 @@ describe('Product Model', () => {
         price: 5000,
         quantityInInventory: 2,
       });
-      expect(product.errors).to.not.be.empty;
       expect(product.errors.length).to.equal(1);
       expect(product.errors[0]).to.equal('"name" length must be at least 5 characters long');
       done();
@@ -41,12 +40,12 @@ describe('Product Model', () => {
     it('should return errors for an invalid product amount', (done) => {
       const product = ProductModel.create({
         name: 'air storm',
-        price: 500,
+        price: 0,
         quantityInInventory: 2,
       });
       expect(product.errors).to.not.be.empty;
       expect(product.errors.length).to.equal(1);
-      expect(product.errors[0]).to.equal('"price" must be larger than or equal to 1000');
+      expect(product.errors[0]).to.equal('"price" is required');
       done();
     });
   });
