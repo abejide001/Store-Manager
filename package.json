@@ -8,7 +8,7 @@
     "test": "mocha -R spec --compilers js:babel-register",
     "posttest": "eslint",
     "cover": "istanbul cover _mocha -- --compilers js:babel-register --colors --reporter dot test",
-    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test",
+    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha /test",
     "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "engines": {
