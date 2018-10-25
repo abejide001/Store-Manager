@@ -8,7 +8,7 @@
     "test": "mocha -R spec --compilers js:babel-register",
     "posttest": "eslint --ignore-pattern _build .",
     "cover": "istanbul cover _mocha -- --compilers js:babel-register --colors --reporter dot test",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "engines": {
     "node": "9.6.1"
