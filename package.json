@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-watch index.js",
     "test": "mocha -R spec --compilers js:babel-register",
-    "posttest": "eslint --ignore-pattern _build .",
+    "posttest": "eslint",
     "cover": "istanbul cover _mocha -- --compilers js:babel-register --colors --reporter dot test",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
