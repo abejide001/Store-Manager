@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Charmonman|Roboto|K2D");
+/* records */
+
+#records {
+  min-height: 510px;
+  background: url("../images/record-background.jpeg") no-repeat left;
+  background-size: cover;
+}
+
+#record-title h1 {
+  text-align: center;
+  font: normal bold 45px "K2D", sans-serif;
+}
+
+table {
+  text-align: center;
+  width: 900px;
+  margin: auto;
+  table-layout: fixed;
+}
+
+table,
+tr,
+th,
+td {
+  padding: 10px;
+  border: 1px solid whitesmoke;
+  font: normal 21px "K2D", sans-serif;
+  border-collapse: collapse;
+}
+
+td:hover {
+  background-color: gray;
+  cursor: pointer;
+}
