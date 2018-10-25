@@ -9,7 +9,10 @@ app.use('/api/v1/products', product);
 app.use('/api/v1/sales', sale);
 
 app.get('/api/v1', (req, res) => {
-  res.send({ message: 'welcome to store manager' });
+  res.status(200).send({ message: 'welcome to store manager' });
+});
+app.use('*', (req, res) => {
+  res.status(404).send('route not found');
 });
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {

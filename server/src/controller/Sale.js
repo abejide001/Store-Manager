@@ -11,7 +11,7 @@ const Sale = {
     if (!sale) {
       return res.status(404).send({ message: 'sale not found' });
     }
-    return res.send(sale);
+    return res.status(200).send(sale);
   },
   createSales(req, res) {
     const newSale = SaleModel.create(req.body);

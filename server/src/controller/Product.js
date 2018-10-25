@@ -11,7 +11,7 @@ const Product = {
     if (!product) {
       return res.status(404).send({ message: 'product not found' });
     }
-    return res.send(product);
+    return res.status(200).send(product);
   },
   createProducts(req, res) {
     const newProduct = ProductModel.create(req.body);
