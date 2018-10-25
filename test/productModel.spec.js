@@ -48,5 +48,16 @@ describe('Product Model', () => {
       expect(product.errors[0]).to.equal('"price" is required');
       done();
     });
+    it('should return errors for an invalid quantityInInventory', (done) => {
+      const product = ProductModel.create({
+        name: 'air storm',
+        price: 100,
+        quantityInInventory: 0,
+      });
+      expect(product.errors).to.not.be.empty;
+      expect(product.errors.length).to.equal(1);
+      expect(product.errors[0]).to.equal('"quantityInInventory" is required');
+      done();
+    });
   });
 });

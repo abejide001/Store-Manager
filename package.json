@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-watch index.js",
     "test": "mocha -R spec --compilers js:babel-register",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "engines": {
     "node": "9.6.1"

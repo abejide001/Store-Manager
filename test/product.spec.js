@@ -11,6 +11,7 @@ describe('GET /products', () => {
       .get('/api/v1/products')
       .end((err, res) => {
         res.should.have.status(200);
+        expect(res.body).to.exist;
         done();
       });
   });
@@ -22,6 +23,7 @@ describe('GET /products/:id', () => {
       .end((err, res) => {
         res.should.have.status(404);
         expect(res.body.message).to.equal('product not found');
+        expect(res.body).to.not.be.empty;
         done(err);
       });
   });
@@ -31,6 +33,7 @@ describe('GET /products/:id', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(200);
+        expect(res.body).to.exist;
         done(err);
       });
   });
@@ -55,6 +58,7 @@ describe('POST /products', () => {
       })
       .end((err, res) => {
         expect(res.status).to.equal(201);
+        expect(res.body).to.exist;
         done();
       });
   });
