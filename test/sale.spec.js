@@ -19,7 +19,7 @@ describe('GET /sales', () => {
 describe('GET /sales/:id', () => {
   it('should return 404 if id is invalid', (done) => {
     chai.request(server)
-      .get(`/api/v1/sales/${10}`)
+      .get('/api/v1/sales/10')
       .end((err, res) => {
         expect(res.status).to.equal(404);
         done(err);
@@ -27,7 +27,7 @@ describe('GET /sales/:id', () => {
   });
   it('should return a sale record if id is valid', (done) => {
     chai.request(server)
-      .get(`/api/v1/sales/${1}`)
+      .get('/api/v1/sales/1')
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body).to.not.be.empty;
@@ -42,7 +42,7 @@ describe('POST /sales', () => {
       .send({})
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        expect(res.body).to.be.empty;
+        expect(res.body.errors).to.not.be.empty;
         done(err);
       });
   });
@@ -56,8 +56,6 @@ describe('POST /sales', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(201);
-        expect(res.body.productName).to.equal('nike jordan');
-        expect(res.body.quantitySold).to.equal(2);
         done(err);
       });
   });

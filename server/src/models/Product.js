@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Validation from '../helper/product-helper';
 
 class Product {
   constructor() {
@@ -16,15 +16,6 @@ class Product {
     }];
   }
 
-  validate(sale) {
-    this.schema = {
-      name: Joi.string().required().min(5).max(15),
-      price: Joi.number().required().min(1000),
-      quantityInInventory: Joi.number().required().min(1).max(10),
-    };
-    return Joi.validate(sale, this.schema);
-  }
-
   findAll() {
     return this.products;
   }
@@ -33,14 +24,18 @@ class Product {
     return this.products.find(product => product.id === Number(id));
   }
 
-  create(product) {
-    const validated = this.validate(product);
-    if (validated.error) {
+  create(data) {
+    const validated = Validation.validate(data);
+    if (validated.errors.length !== 0) {
       return validated;
     }
-    product.id = this.products.length + 1;
+    const { name, price, quantityInInventory } = validated.value;
+    const product = {
+      id: this.products.length + 1, name, price, quantityInInventory,
+    };
     this.products.push(product);
-    return product;
+    validated.value = product;
+    return validated;
   }
 }
 export default new Product();
