@@ -24,53 +24,39 @@ describe('Product Model', () => {
         price: 1000,
         quantityInInventory: 2,
       });
-      expect(product.error).to.not.exist;
+      expect(product.errors).to.be.empty;
       done();
     });
     it('should return errors for an invalid product name', (done) => {
-      const product = ProductModel.validate({
+      const product = ProductModel.create({
         name: 'n',
         price: 5000,
         quantityInInventory: 2,
       });
-      expect(product.error).to.exist;
-      expect(product.error.details.length).to.equal(1);
-      expect(product.error.details[0].message).to.equal('"name" length must be at least 5 characters long');
+      expect(product.errors.length).to.equal(1);
+      expect(product.errors[0]).to.equal('"name" length must be at least 5 characters long');
       done();
     });
     it('should return errors for an invalid product amount', (done) => {
-      const product = ProductModel.validate({
+      const product = ProductModel.create({
         name: 'air storm',
-        price: 500,
+        price: 0,
         quantityInInventory: 2,
       });
-      expect(product.error).to.exist;
-      expect(product.error.details.length).to.equal(1);
-      expect(product.error.details[0].message).to.equal('"price" must be larger than or equal to 1000');
+      expect(product.errors).to.not.be.empty;
+      expect(product.errors.length).to.equal(1);
+      expect(product.errors[0]).to.equal('"price" is required');
       done();
     });
-    it('should return errors for an product with invalid field "id"', (done) => {
-      const product = ProductModel.validate({
-        id: 7,
-        name: 'nike air',
-        price: 5000,
-        quantityInInventory: 2,
+    it('should return errors for an invalid quantityInInventory', (done) => {
+      const product = ProductModel.create({
+        name: 'air storm',
+        price: 100,
+        quantityInInventory: 0,
       });
-      expect(product.error).to.exist;
-      expect(product.error.details.length).to.equal(1);
-      expect(product.error.details[0].message).to.equal('"id" is not allowed');
-      done();
-    });
-    it('should return errors for an product with invalid field "randomField"', (done) => {
-      const product = ProductModel.validate({
-        name: 'air max',
-        price: 5000,
-        quantityInInventory: 2,
-        randomField: 'random',
-      });
-      expect(product.error).to.exist;
-      expect(product.error.details.length).to.equal(1);
-      expect(product.error.details[0].message).to.equal('"randomField" is not allowed');
+      expect(product.errors).to.not.be.empty;
+      expect(product.errors.length).to.equal(1);
+      expect(product.errors[0]).to.equal('"quantityInInventory" is required');
       done();
     });
   });
