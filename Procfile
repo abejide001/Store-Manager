@@ -1,1 +1,1 @@
-web: node ./_build/index.js
+web: npm run start
