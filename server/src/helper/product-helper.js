@@ -18,7 +18,7 @@ const Validation = {
       return validatedProduct;
     }
     if (validatedProduct.value.price < 1) {
-      validatedProduct.errors.push('"price" must be larger than or equal to 1000');
+      validatedProduct.errors.push('"price" must be larger than or equal to 1');
     }
     return validatedProduct;
   },
