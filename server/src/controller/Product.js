@@ -5,13 +5,13 @@ const Product = {
     const products = ProductModel.findAll();
     return res.status(200).send(products);
   },
-  getOneProduct(req, res) {
+  async getOneProduct(req, res) {
     const { id } = req.params;
-    const product = ProductModel.findOne(id);
-    if (!product) {
+    const product = await ProductModel.findOne(id);
+    if (!product.value) {
       return res.status(404).send({ message: 'product not found' });
     }
-    return res.status(200).send(product);
+    return res.send(product);
   },
   async createProduct(req, res) {
     const newProduct = await ProductModel.create(req.body);
