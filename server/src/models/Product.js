@@ -5,7 +5,7 @@ import Validation from '../helper/product-helper';
 const Product = {
   async findAll() {
     try {
-      const result = await pool.query('SELECT * products');
+      const result = await pool.query('SELECT * FROM products');
       return { errors: [], value: result.rows };
     } catch (err) {
       return { errors: [err.message] };
