@@ -1,14 +1,14 @@
 import ProductModel from '../models/Product';
 
 const Product = {
-  getAllProducts(req, res) {
-    const products = ProductModel.findAll();
+  async getAllProducts(req, res) {
+    const products = await ProductModel.findAll();
     return res.status(200).send(products);
   },
-  getOneProduct(req, res) {
+  async getOneProduct(req, res) {
     const { id } = req.params;
-    const product = ProductModel.findOne(id);
-    if (!product) {
+    const product = await ProductModel.findOne(id);
+    if (!product.value) {
       return res.status(404).send({ message: 'product not found' });
     }
     return res.status(200).send(product);

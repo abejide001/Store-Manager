@@ -4,7 +4,24 @@ import ProductModel from '../server/src/models/Product';
 const { expect } = chai;
 
 describe('Product Model', () => {
-  describe('create', () => {
+  describe('findAll', () => {
+    it('should retrieve products', (done) => {
+      (async () => {
+        const product = await ProductModel.create(
+          { name: 'fila jordan', price: 50000, quantity_in_inventory: 3 },
+        );
+        const persistedProducts = await ProductModel.findAll();
+        expect(persistedProducts.errors).to.be.empty;
+        expect(persistedProducts.value).to.not.be.empty;
+        const persistedProduct = persistedProducts.value.find(pProduct =>pProduct.id === product.value.id);
+        expect(persistedProduct.name).to.equal('fila jordan');
+        expect(persistedProduct.price).to.equal(50000);
+        expect(persistedProduct.quantity_in_inventory).to.equal(3);
+        done();
+      })();
+    })
+  }),
+  describe('createProducts', () => {
     it('should persist the product', (done) => {
       (async () => {
         const product = await ProductModel.create(
@@ -14,7 +31,7 @@ describe('Product Model', () => {
         expect(product.value.id).to.be.greaterThan(0); // means we created the entry
         done();
       })();
-    });
+    }),
     it('should not return errors for a valid product', (done) => {
       (async () => {
         const product = await ProductModel.create({
@@ -55,5 +72,5 @@ describe('Product Model', () => {
         done();
       })();
     });
-  });
+  })
 });

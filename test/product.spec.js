@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../index';
+import ProductModel from '../server/src/models/Product';
 
 chai.use(chaiHttp);
 const should = chai.should(); // eslint-disable-line
@@ -12,22 +13,35 @@ describe('GET /products', () => {
       .end((err, res) => {
         res.should.have.status(200);
         expect(res.body).to.exist;
+        expect(res.body).to.exist;
         done();
       });
   });
 });
 describe('GET /products/:id', () => {
   it('should return 404 if an invalid id is passed', (done) => {
-    chai.request(server)
-      .get('/api/v1/products/9')
-      .end((err, res) => {
-        res.should.have.status(404);
-        expect(res.body.message).to.equal('product not found');
-        expect(res.body).to.not.be.empty;
-        done(err);
-      });
+    (async () => {
+      const product = await ProductModel.create(
+        { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
+      );
+      const persistedProducts = await ProductModel.findAll();
+      const count = persistedProducts.value.length - 1;
+      const id = persistedProducts.value[count].id + 100;
+      chai.request(server)
+        .get('/api/v1/products/'+id)
+        .end((err, res) => {
+          res.should.have.status(404);
+          expect(res.body.message).to.equal('product not found');
+          expect(res.body).to.not.be.empty;
+          done(err);
+        });
+    })();
   });
   it('should return a product if id is valid', (done) => {
+    (async () => {
+      const product = await ProductModel.create(
+        { name: 'fila jordan', price: 50000, quantity_in_inventory: 3 },
+      );
     chai.request(server)
       .get('/api/v1/products/1')
       .end((err, res) => {
@@ -36,6 +50,7 @@ describe('GET /products/:id', () => {
         expect(res.body).to.exist;
         done(err);
       });
+    })();
   });
 });
 describe('POST /products', () => {
