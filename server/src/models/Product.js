@@ -3,21 +3,6 @@ import pool from '../../db-config/database_connection';
 import Validation from '../helper/product-helper';
 
 const Product = {
-  products() {
-    return [{
-      id: 1,
-      name: 'air max',
-      price: 1000,
-      quantityInInventory: 2,
-    },
-      {
-        id: 2,
-        name: 'nike air',
-        price: 1000,
-        quantityInInventory: 3,
-      }]
-  },
-
   async findAll() {
     try {
       const result = await pool.query('SELECT * products');
@@ -27,8 +12,13 @@ const Product = {
     }
   },
 
-  findOne(id) {
-    return this.products().find(product => product.id === Number(id));
+  async findOne(id) {
+    try {
+      const result = await pool.query('SELECT * FROM products WHERE id=$1', [id]);
+      return { errors: [], value: result.rows[0] };
+    } catch (err) {
+      return { errors: [err.message] };
+    }
   },
 
   async create(data) {
