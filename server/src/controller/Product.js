@@ -24,5 +24,12 @@ const Product = {
       newProduct,
     });
   },
+  async deleteOneProduct(req, res) {
+    const { id } = req.params;
+    await ProductModel.deleteOne(id);
+    res.status(201).send({
+      message: 'deleted',
+    });
+  },
 };
 export default Product;
