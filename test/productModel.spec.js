@@ -4,21 +4,14 @@ import ProductModel from '../server/src/models/Product';
 const { expect } = chai;
 
 describe('Product Model', () => {
-  describe('find one', () => {
-    it('should not return a product for a product id that does not exist', (done) => {
-      const count = ProductModel.findAll().length;
-      expect(ProductModel.findOne(count + 1)).to.not.exist;
-      done();
-    });
-  });
   describe('create', () => {
-    it('should persist the product', done => {
+    it('should persist the product', (done) => {
       (async () => {
         const product = await ProductModel.create(
-          { name: 'nike jordan', price: 10000, quantity_in_inventory: 2 }
+          { name: 'nike jordan', price: 10000, quantity_in_inventory: 2 },
         );
         expect(product.errors.length).to.equal(0);
-        expect(product.value.id).to.be.greaterThan(0); //means we created the entry
+        expect(product.value.id).to.be.greaterThan(0); // means we created the entry
         done();
       })();
     });
