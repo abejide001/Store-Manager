@@ -1,8 +1,8 @@
 import ProductModel from '../models/Product';
 
 const Product = {
-  getAllProducts(req, res) {
-    const products = ProductModel.findAll();
+  async getAllProducts(req, res) {
+    const products = await ProductModel.findAll();
     return res.status(200).send(products);
   },
   async getOneProduct(req, res) {
