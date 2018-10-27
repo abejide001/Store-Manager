@@ -18,17 +18,17 @@ const Validation = {
       return validatedProduct;
     }
     if (validatedProduct.value.price < 1) {
-      validatedProduct.errors.push('"price" must be larger than or equal to 1000');
+      validatedProduct.errors.push('"price" must be larger than or equal to 1');
     }
     return validatedProduct;
   },
   validateQuantityInInventory(validatedProduct) {
-    if (!validatedProduct.value.quantityInInventory) {
-      validatedProduct.errors.push('"quantityInInventory" is required');
+    if (!validatedProduct.value.quantity_in_inventory) {
+      validatedProduct.errors.push('"quantity_in_inventory" is required');
       return validatedProduct;
     }
-    if (validatedProduct.value.quantityInInventory < 1) {
-      validatedProduct.errors.push('"quantityInInventory" cannot be less than 1');
+    if (validatedProduct.value.quantity_in_inventory < 1) {
+      validatedProduct.errors.push('"quantity_in_inventory" cannot be less than 1');
     }
     return validatedProduct;
   },
