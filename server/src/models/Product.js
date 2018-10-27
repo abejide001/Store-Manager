@@ -18,8 +18,13 @@ const Product = {
       }]
   },
 
-  findAll() {
-    return this.products();
+  async findAll() {
+    try {
+      const result = await pool.query('SELECT * products');
+      return { errors: [], value: result.rows };
+    } catch (err) {
+      return { errors: [err.message] };
+    }
   },
 
   findOne(id) {
