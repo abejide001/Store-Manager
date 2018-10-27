@@ -1,13 +1,29 @@
+import 'babel-polyfill';
 import pool from '../../db-config/database_connection';
 import Validation from '../helper/product-helper';
 
 const Product = {
+  products() {
+    return [{
+      id: 1,
+      name: 'air max',
+      price: 1000,
+      quantityInInventory: 2,
+    },
+      {
+        id: 2,
+        name: 'nike air',
+        price: 1000,
+        quantityInInventory: 3,
+      }]
+  },
+
   findAll() {
-    return this.products;
+    return this.products();
   },
 
   findOne(id) {
-    return this.products.find(product => product.id === Number(id));
+    return this.products().find(product => product.id === Number(id));
   },
 
   async create(data) {
@@ -32,4 +48,4 @@ const Product = {
     }
   },
 };
-export default new Product();
+export default Product;

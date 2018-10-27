@@ -54,7 +54,7 @@ describe('POST /products', () => {
       .send({
         name: 'air max',
         price: 1000,
-        quantityInInventory: 3,
+        quantity_in_inventory: 3,
       })
       .end((err, res) => {
         expect(res.status).to.equal(201);
