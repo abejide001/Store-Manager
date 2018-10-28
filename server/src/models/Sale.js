@@ -57,7 +57,7 @@ const Sale = {
     const { product_name, quantity_sold } = validated.value;
     try {
       const result = await pool.query(
-        'INSERT INTO sales(product_name, quantity_sold) VALUES($1, $2, $3) RETURNING id',
+        'INSERT INTO sales(product_name, quantity_sold) VALUES($1, $2) RETURNING id',
         [product_name, quantity_sold],
       );
       const sale = {
