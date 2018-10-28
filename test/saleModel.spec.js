@@ -4,47 +4,56 @@ import SaleModel from '../server/src/models/Sale';
 const { expect } = chai;
 
 describe('Sale Model', () => {
-  describe('find one', () => {
-    it('should not return a sale for a sale id that does not exist', (done) => {
-      const count = SaleModel.findAll().length;
-      expect(SaleModel.findOne(count + 1)).to.not.exist;
-      done();
+  describe('find all', () => {
+    it('should retrieve sales', (done) => {
+      (async () => {
+        const sale = await SaleModel.create(
+          { product_name: 'fila jordan', quantity_sold: 3 },
+        );
+        const persistedSales = await SaleModel.findAll();
+        expect(persistedSales.errors).to.be.empty;
+        expect(persistedSales.value).to.not.be.empty;
+        const persistedSale = persistedSales.value.find(pSale => pSale.id === sale.value.id);
+        expect(persistedSale.product_name).to.equal('fila jordan');
+        expect(persistedSale.quantity_sold).to.equal(3);
+        done();
+      })();
     });
   });
   describe('create', () => {
-    it('should increase the number of sales', (done) => {
-      const count = SaleModel.findAll().length;
-      SaleModel.create({ productName: 'nike jordan', quantitySold: 2 });
-      expect(SaleModel.findAll().length).to.equal(count + 1);
-      done();
+    it('should persist the sale', (done) => {
+      (async () => {
+        const sale = await SaleModel.create(
+          { product_name: 'air max', quantity_sold: 10 },
+        );
+        expect(sale.errors.length).to.equal(0);
+        expect(sale.value.id).to.be.greaterThan(0); // means we created the entry
+        done();
+      })();
     });
-    it('should not return errors for a valid sale', (done) => {
-      const sale = SaleModel.create({
-        productName: 'nike jordan',
-        quantitySold: 1,
-      });
-      expect(sale.errors).to.be.empty;
-      done();
+    it('should return errors for an invalid quantity sold', (done) => {
+      (async () => {
+        const product = await SaleModel.create({
+          product_name: 'air max',
+          quantity_sold: 0,
+        });
+        expect(product.errors).to.not.be.empty;
+        expect(product.errors.length).to.equal(1);
+        expect(product.errors[0]).to.equal('"quantity_sold" is required');
+        done();
+      })();
     });
-    it('should return errors for an invalid sale productName', (done) => {
-      const sale = SaleModel.create({
-        productName: 'n',
-        quantitySold: 3,
-      });
-      expect(sale.errors).to.not.be.empty;
-      expect(sale.errors.length).to.equal(1);
-      expect(sale.errors[0]).to.equal('"productName" length must be at least 5 characters long');
-      done();
-    });
-    it('should return errors for an invalid quantitySold', (done) => {
-      const sale = SaleModel.create({
-        productName: 'air storm',
-        quantitySold: -1,
-      });
-      expect(sale.errors).to.not.be.empty;
-      expect(sale.errors.length).to.equal(1);
-      expect(sale.errors[0]).to.equal('"quantitySold" must be larger than or equal to 1');
-      done();
+    it('should return errors for an invalid product_name', (done) => {
+      (async () => {
+        const product = await SaleModel.create({
+          product_name: 'aa',
+          quantity_sold: 5,
+        });
+        expect(product.errors).to.not.be.empty;
+        expect(product.errors.length).to.equal(1);
+        expect(product.errors[0]).to.equal('"product_name" length must be at least 5 characters long');
+        done();
+      })();
     });
   });
 });
