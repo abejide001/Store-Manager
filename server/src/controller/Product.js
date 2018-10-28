@@ -11,9 +11,9 @@ const Product = {
     if (!product.value) {
       return res.status(404).send({ message: 'product not found' });
     }
-    return res.status(200).send(product);
+    return res.send(product);
   },
-  async createProducts(req, res) {
+  async createProduct(req, res) {
     const newProduct = await ProductModel.create(req.body);
     if (newProduct.errors.length !== 0) {
       res.status(400).send(newProduct);
@@ -22,6 +22,13 @@ const Product = {
     res.status(201).send({
       message: 'product created',
       newProduct,
+    });
+  },
+  async deleteOneProduct(req, res) {
+    const { id } = req.params;
+    await ProductModel.deleteOne(id);
+    res.status(201).send({
+      message: 'deleted',
     });
   },
 };

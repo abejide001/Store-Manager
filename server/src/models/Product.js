@@ -42,5 +42,13 @@ const Product = {
       return validated;
     }
   },
+  async deleteOne(id) {
+    try {
+      await pool.query('DELETE FROM products WHERE id=$1', [id]);
+      return { errors: [] };
+    } catch (err) {
+      return { errors: [err.message] };
+    }
+  },
 };
 export default Product;
