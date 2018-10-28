@@ -206,3 +206,19 @@ describe('Product Model', () => {
     });
   });
 });
+describe('Delete product model', () => {
+  it('should ensure a product is deleted', (done) => {
+    (async () => {
+      try {
+        const product = await ProductModel.create(
+          { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
+        );
+        const deleteProduct = await ProductModel.deleteOne(product.value.id);
+        expect(deleteProduct.errors).to.be.empty;
+        done();
+      } catch (err) {
+        done(err);
+      }
+    })();
+  });
+});
