@@ -4,6 +4,21 @@ import SaleModel from '../server/src/models/Sale';
 const { expect } = chai;
 
 describe('Sale Model', () => {
+  describe('find one', () => {
+    it('should retrieve a persisted sale', (done) => {
+      (async () => {
+        const sale = await SaleModel.create(
+          { product_name: 'fila jordan', quantity_sold: 3 },
+        );
+        const persistedSale = await SaleModel.findOne(sale.value.id);
+        expect(persistedSale.errors).to.be.empty;
+        expect(persistedSale.value).to.not.be.empty;
+        expect(persistedSale.value.product_name).to.equal('fila jordan');
+        expect(persistedSale.value.quantity_sold).to.equal(3);
+        done();
+      })();
+    });
+  });
   describe('find all', () => {
     it('should retrieve sales', (done) => {
       (async () => {
