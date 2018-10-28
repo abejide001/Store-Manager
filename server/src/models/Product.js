@@ -21,6 +21,35 @@ const Product = {
     }
   },
 
+  async update(id, data) {
+    if (data.id) {
+      return { errors: ['Updating "id" is not allowed'] };
+    }
+    const product = await this.findOne(id);
+    if (!product.value) {
+      return { errors: ['Product does not exist'] };
+    }
+    Object.assign(product.value, data);
+    const validatedProduct = Validation.validate(product.value);
+    if (validatedProduct.errors.length !== 0) {
+      return validatedProduct;
+    }
+    try {
+      const result = await pool.query(
+        'UPDATE products SET name=$1, price=$2, quantity_in_inventory=$3 WHERE ID=$4 RETURNING *',
+        [
+          validatedProduct.value.name,
+          validatedProduct.value.price,
+          validatedProduct.value.quantity_in_inventory,
+          validatedProduct.value.id,
+        ],
+      );
+      return { value: result.rows[0], errors: []};
+    } catch (err) {
+      return { errors: [err] };
+    }
+  },
+
   async create(data) {
     const validated = Validation.validate(data);
     if (validated.errors.length !== 0) {
