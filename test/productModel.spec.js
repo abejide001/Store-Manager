@@ -21,7 +21,138 @@ describe('Product Model', () => {
       })();
     })
   }),
-  describe('createProducts', () => {
+  describe('updateProduct', () => {
+    it('should update the product name', (done) => {
+      (async () => {
+        try {
+        const product = await ProductModel.create(
+          { name: 'nike ordan', price: 700, quantity_in_inventory: 5 },
+        );
+        const updatedProduct = await ProductModel.update(product.value.id, { name: 'nike jordan' });
+        expect(updatedProduct.errors.length).to.equal(0);
+        expect(updatedProduct.value.id).to.equal(product.value.id);
+        expect(updatedProduct.value.name).to.equal('nike jordan');
+        done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    }),
+
+    it('should update the product price', (done) => {
+      (async () => {
+        try {
+        const product = await ProductModel.create(
+          { name: 'nike jordan', price: 750, quantity_in_inventory: 5 },
+        );
+        const updatedProduct = await ProductModel.update(product.value.id, { price: 800 });
+        expect(updatedProduct.errors.length).to.equal(0);
+        expect(updatedProduct.value.id).to.equal(product.value.id);
+        expect(updatedProduct.value.price).to.equal(800);
+        done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    }),
+
+    it('should update the product quantity_in_inventory', (done) => {
+      (async () => {
+        try {
+        const product = await ProductModel.create(
+          { name: 'nike jordan', price: 750, quantity_in_inventory: 5 },
+        );
+        const updatedProduct = await ProductModel.update(product.value.id, { quantity_in_inventory: 10 });
+        expect(updatedProduct.errors.length).to.equal(0);
+        expect(updatedProduct.value.id).to.equal(product.value.id);
+        expect(updatedProduct.value.quantity_in_inventory).to.equal(10);
+        done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    }),
+
+    it('should not update the product id', (done) => {
+      (async () => {
+        try {
+        const product = await ProductModel.create(
+          { name: 'nike jordan', price: 750, quantity_in_inventory: 5 },
+        );
+        const updatedProduct = await ProductModel.update(product.value.id, { id: 1000 });
+        expect(updatedProduct.errors.length).to.be.greaterThan(0);
+        done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    }),
+
+    it('should return errors for an invalid price update', (done) => {
+      (async () => {
+        try {
+          const product = await ProductModel.create(
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3},
+          );
+          const updatedProduct = await ProductModel.update(product.value.id, { price: 0 });
+          expect(updatedProduct.errors.length).to.be.greaterThan(0);
+          done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    }),
+
+    it('should return errors for an invalid name update', (done) => {
+      (async () => {
+        try {
+          const product = await ProductModel.create(
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3},
+          );
+          const updatedProduct = await ProductModel.update(product.value.id, { name: 'same' });
+          expect(updatedProduct.errors.length).to.be.greaterThan(0);
+          done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    }),
+
+    it('should return errors for an invalid quantity_in_inventory update', (done) => {
+      (async () => {
+        try {
+          const product = await ProductModel.create(
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3},
+          );
+          const updatedProduct = await ProductModel.update(product.value.id, { quantity_in_inventory: 0 });
+          expect(updatedProduct.errors.length).to.be.greaterThan(0);
+          done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    }),
+
+    it('should return errors for a non existing product', (done) => {
+      (async () => {
+        try {
+          const product = await ProductModel.create(
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3},
+          );
+          const persistedProducts = await ProductModel.findAll();
+          const count = persistedProducts.value.length - 1;
+          const id = persistedProducts.value[count].id + 100;
+          const updatedProduct = await ProductModel.update(id, { name: 'some other shoe' });
+          expect(updatedProduct.errors.length).to.be.greaterThan(0);
+          expect(updatedProduct.value).to.not.exist;
+          done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    })
+  }),
+  describe('createProduct', () => {
     it('should persist the product', (done) => {
       (async () => {
         const product = await ProductModel.create(
