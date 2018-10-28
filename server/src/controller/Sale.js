@@ -16,10 +16,10 @@ const Sale = {
       newSale,
     });
   },
-  getOneSale(req, res) {
+  async getOneSale(req, res) {
     const { id } = req.params;
-    const sale = SaleModel.findOne(id);
-    if (!sale) {
+    const sale = await SaleModel.findOne(id);
+    if (!sale.value) {
       return res.status(404).send({ message: 'sale not found' });
     }
     return res.status(200).send(sale);
