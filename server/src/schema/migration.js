@@ -3,7 +3,8 @@ import pool from '../../db-config/database_connection';
 
 const Migration = {
   async migrate() {
-    console.log("Creating table products");
+    /* eslint-disable no-console */
+    console.log('Creating table products');
     await pool.query(`
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
@@ -13,7 +14,7 @@ CREATE TABLE products(
 );
       `);
 
-    console.log("Creating table sales");
+    console.log('Creating table sales');
     await pool.query(`
 
 CREATE TABLE sales(
@@ -22,7 +23,7 @@ CREATE TABLE sales(
     quantity_sold INTEGER NOT NULL
 );
     `);
-  }
+  },
 };
 
 export default Migration;

@@ -44,7 +44,7 @@ const Product = {
           validatedProduct.value.id,
         ],
       );
-      return { value: result.rows[0], errors: []};
+      return { value: result.rows[0], errors: [] };
     } catch (err) {
       return { errors: [err] };
     }

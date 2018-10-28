@@ -21,15 +21,15 @@ describe('GET /products', () => {
 describe('PUT /products/:id', () => {
   it('should return 404 if an invalid id is passed', (done) => {
     (async () => {
-      const product = await ProductModel.create(
+      await ProductModel.create(
         { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
       );
       const persistedProducts = await ProductModel.findAll();
       const count = persistedProducts.value.length - 1;
       const id = persistedProducts.value[count].id + 100;
       chai.request(server)
-        .put('/api/v1/products/'+id)
-        .send({ name: "some other shoe" })
+        .put(`/api/v1/products/${id}`)
+        .send({ name: 'some other shoe' })
         .end((err, res) => {
           res.should.have.status(404);
           expect(res.body.errors[0]).to.equal('Product does not exist');
@@ -42,16 +42,16 @@ describe('PUT /products/:id', () => {
       const product = await ProductModel.create(
         { name: 'fila jordan', price: 50000, quantity_in_inventory: 3 },
       );
-    chai.request(server)
-      .put('/api/v1/products/'+product.value.id)
-      .send({ name: 'fila fubu', price: 55000, quantity_in_inventory: 5, })
-      .end((err, res) => {
-        expect(res.status).to.equal(201);
-        expect(res.body.value.name).to.equal('fila fubu');
-        expect(res.body.value.price).to.equal(55000);
-        expect(res.body.value.quantity_in_inventory).to.equal(5);
-        done(err);
-      });
+      chai.request(server)
+        .put(`/api/v1/products/${product.value.id}`)
+        .send({ name: 'fila fubu', price: 55000, quantity_in_inventory: 5, })
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          expect(res.body.value.name).to.equal('fila fubu');
+          expect(res.body.value.price).to.equal(55000);
+          expect(res.body.value.quantity_in_inventory).to.equal(5);
+          done(err);
+        });
     })();
   });
 
@@ -60,14 +60,14 @@ describe('PUT /products/:id', () => {
       const product = await ProductModel.create(
         { name: 'fila jordan', price: 50000, quantity_in_inventory: 3 },
       );
-    chai.request(server)
-      .put('/api/v1/products/'+product.value.id)
-      .send({ name: 'fila', price: 0, quantity_in_inventory: 0, })
-      .end((err, res) => {
-        expect(res.status).to.equal(400);
-        expect(res.body.errors.length).to.equal(3);
-        done(err);
-      });
+      chai.request(server)
+        .put(`/api/v1/products/${product.value.id}`)
+        .send({ name: 'fila', price: 0, quantity_in_inventory: 0 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.errors.length).to.equal(3);
+          done(err);
+        });
     })();
   });
 });
