@@ -6,7 +6,7 @@ const Migration = {
     /* eslint-disable no-console */
     console.log('Creating table products');
     await pool.query(`
-CREATE TABLE products(
+CREATE TABLE IF NOT EXISTS products(
     id SERIAL PRIMARY KEY,
     name VARCHAR(40) NOT NULL,
     price INTEGER NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE products(
     console.log('Creating table sales');
     await pool.query(`
 
-CREATE TABLE sales(
+CREATE TABLE IF NOT EXISTS sales(
     id SERIAL PRIMARY KEY,
     product_name VARCHAR(40) NOT NULL,
     quantity_sold INTEGER NOT NULL

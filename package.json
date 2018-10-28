@@ -6,11 +6,11 @@
   "scripts": {
     "start": "babel-watch index.js",
     "test:db-create": "createdb -U postgres store_manager_db_test",
-    "test:db-drop": "dropdb -U postgres store_manager_db_test",
+    "test:db-drop": "dropdb --if-exists -U postgres store_manager_db_test",
     "pretest": "npm run test:db-drop; npm run test:db-create && npm run db-migrate",
     "test": "mocha -R spec --compilers js:babel-register",
     "db-create": "createdb -U postgres store_manager_db",
-    "db-drop": "dropdb -U postgres store_manager_db",
+    "db-drop": "dropdb --if-exists -U postgres store_manager_db",
     "db-migrate": "babel-node --presets env server/src/schema/migration.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
