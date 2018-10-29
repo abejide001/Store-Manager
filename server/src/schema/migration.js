@@ -23,6 +23,16 @@ CREATE TABLE IF NOT EXISTS sales(
     quantity_sold INTEGER NOT NULL
 );
     `);
+    console.log('Creating table users');
+    await pool.query(`
+CREATE TABLE IF NOT EXISTS users(
+    id SERIAL PRIMARY KEY,
+    fullname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+      `);
   },
 };
 
