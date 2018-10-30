@@ -10,6 +10,7 @@ describe('User Model', () => {
         email: 'abejide@yahoo.com',
         fullname: 'abejide femi',
         password: 'abcd',
+        role: 'admin',
       });
       expect(user).to.exist;
       done();
