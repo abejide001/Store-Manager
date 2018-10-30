@@ -1,4 +1,4 @@
-import Helper from '../helper/user-helper';
+import Helper from '../helper/hashToken';
 import pool from '../../db-config/database_connection';
 
 const User = {
@@ -18,9 +18,7 @@ const User = {
 
     try {
       const { rows } = await pool.query(createQuery, values);
-      const token = Helper.generateToken(rows[0].id);
-      // return res.status(201).send({ token });
-      return token;
+      return rows;
     } catch (error) {
     // if (error.routine === '_bt_check_unique') {
     //     return res.status(400).send({ message: 'User with that EMAIL already exist' });

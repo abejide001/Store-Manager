@@ -1,10 +1,11 @@
-import Helper from '../helper/user-helper';
-import pool from '../../db-config/database_connection';
+import Helper from '../helper/hashToken';
 import User from '../models/User';
 
-const User = {
+const Users = {
   async register(req, res) {
-    const user = await User.create(req.body);
-  }
+    const users = await User.create(req.body);
+    const token = Helper.generateToken(users[0].id);
+    return res.header('x-auth-token', token).status(201).send(users);
+  },
 };
-export default User;
+export default Users;

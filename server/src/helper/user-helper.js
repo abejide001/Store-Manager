@@ -4,15 +4,16 @@ const Roles = [
 ];
 
 const Validation = {
-  validateRole(validatedUser) {
+  validateRole(validateUser) {
     if (!validateUser.value.role) {
       validateUser.errors.push('"role" is required');
       return validateUser;
     }
     if (!Roles.includes(validateUser.value.role)) {
-      validateUser.errors.push('"role" should be one of: '+Roles.join(","));
+      validateUser.errors.push(`"role" should be one of: '${Roles.join(',')}`);
     }
-  }
+    return validateUser;
+  },
 
   validateFullName(validateUser) {
     if (!validateUser.value.fullname) {
