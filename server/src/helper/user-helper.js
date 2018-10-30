@@ -1,5 +1,19 @@
+const Roles = [
+  'admin',
+  'agent',
+];
 
 const Validation = {
+  validateRole(validatedUser) {
+    if (!validateUser.value.role) {
+      validateUser.errors.push('"role" is required');
+      return validateUser;
+    }
+    if (!Roles.includes(validateUser.value.role)) {
+      validateUser.errors.push('"role" should be one of: '+Roles.join(","));
+    }
+  }
+
   validateFullName(validateUser) {
     if (!validateUser.value.fullname) {
       validateUser.errors.push('"fullname" is required');
@@ -27,6 +41,7 @@ const Validation = {
     const validateUser = {};
     validateUser.errors = [];
     validateUser.value = user;
+    this.validateRole(validateUser);
     this.validateFullName(validateUser);
     this.validateEmail(validateUser);
     return validateUser;

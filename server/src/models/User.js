@@ -5,7 +5,7 @@ const User = {
   async create(data) {
     const hashPassword = Helper.hashPassword(data.password);
     const createQuery = `INSERT INTO
-      users(fullname, username, email, password)
+      users(fullname, username, email, hash_password, role)
       VALUES($1, $2, $3, $4)
       returning *`;
     const values = [
@@ -13,6 +13,7 @@ const User = {
       data.email,
       data.username,
       hashPassword,
+      data.role,
     ];
 
     try {

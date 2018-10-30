@@ -1,10 +1,10 @@
 import Helper from '../helper/user-helper';
 import pool from '../../db-config/database_connection';
-import Register from '../models/Register';
+import User from '../models/User';
 
 const User = {
   async register(req, res) {
-    const user = await Register.create(req.body);
-}
+    const user = await User.create(req.body);
+  }
 };
 export default User;
