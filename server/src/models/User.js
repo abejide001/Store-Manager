@@ -27,9 +27,9 @@ const User = {
       return error.message;
     }
   },
-  async findOne(id) {
+  async findUser(email, password) {
     try {
-      const user = await pool.query('SELECT * FROM users WHERE id=$1', [id]);
+      const user = await pool.query('SELECT * FROM users WHERE email=$1, password=$2', [email, password]);
       return user.rows[0];
     } catch (error) {
       return error.message;
