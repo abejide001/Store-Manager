@@ -1,14 +1,15 @@
 import Helper from '../helper/hashToken';
 import pool from '../../db-config/database_connection';
+import Validation from '../helper/user-helper';
 
 const User = {
   async register(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.status(400).send({ message: 'Some values are missing' });
     }
-    // if (!Helper.isValidEmail(req.body.email)) {
-    //   return res.status(400).send({ message: 'Please enter a valid email address' });
-    // }
+    if (!Validation.isValidEmail(req.body.email)) {
+      return res.status(400).send({ message: 'Please enter a valid email address' });
+    }
     const hashPassword = Helper.hashPassword(req.body.password);
     const createQuery = `INSERT INTO
       users(email, password, fullname, username)
