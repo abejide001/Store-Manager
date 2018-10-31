@@ -12,14 +12,15 @@ const User = {
     }
     const hashPassword = Helper.hashPassword(req.body.password);
     const createQuery = `INSERT INTO
-      users(email, password, fullname, username)
-      VALUES($1, $2, $3, $4)
+      users(email, password, fullname, username, role)
+      VALUES($1, $2, $3, $4, $5)
       returning *`;
     const values = [
       req.body.email,
       hashPassword,
       req.body.fullname,
       req.body.username,
+      req.body.role,
     ];
     try {
       const { rows } = await pool.query(createQuery, values);
@@ -50,7 +51,7 @@ const User = {
       if (!Helper.comparePassword(rows[0].password, req.body.password)) {
         return res.status(400).send({ message: 'The credentials you provided is incorrect' });
       }
-      const token = Helper.generateToken(rows[0].id);
+      const token = Helper.generateToken(rows[0].role);
       return res.status(200).send({ token });
     } catch (error) {
       return res.status(400).send(error.message);

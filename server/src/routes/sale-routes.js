@@ -1,10 +1,10 @@
 import express from 'express';
 import Sale from '../controller/Sale';
-import Auth from '../../db-config/database_connection';
+import Auth from '../middleware/Auth';
 
 const router = express.Router();
 
-router.get('/', Auth.verfifyToken, Sale.getAllSales);
-router.get('/:id', Auth.verfifyToken, Sale.getOneSale);
-router.post('/', Auth.verfifyToken, Sale.createSale);
+router.get('/', Auth.verifyToken, Sale.getAllSales);
+router.get('/:id', Auth.verifyToken, Sale.getOneSale);
+router.post('/', Auth.verifyToken, Sale.createSale);
 export default router;
