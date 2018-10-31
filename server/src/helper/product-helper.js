@@ -13,7 +13,7 @@ const Validation = {
     return validatedProduct;
   },
   validatePrice(validatedProduct) {
-    if (!validatedProduct.value.price) {
+    if (validatedProduct.value.price === undefined) {
       validatedProduct.errors.push('"price" is required');
       return validatedProduct;
     }

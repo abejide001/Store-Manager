@@ -5,5 +5,5 @@ const router = express.Router();
 
 router.get('/', Sale.getAllSales);
 router.get('/:id', Sale.getOneSale);
-router.post('/', Sale.createSales);
+router.post('/', Sale.createSale);
 export default router;

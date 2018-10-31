@@ -1,41 +1,83 @@
+import 'babel-polyfill';
+import pool from '../../db-config/database_connection';
 import Validation from '../helper/product-helper';
 
-class Product {
-  constructor() {
-    this.products = [{
-      id: 1,
-      name: 'air max',
-      price: 1000,
-      quantityInInventory: 2,
-    },
-    {
-      id: 2,
-      name: 'nike air',
-      price: 1000,
-      quantityInInventory: 3,
-    }];
-  }
+const Product = {
+  async findAll() {
+    try {
+      const result = await pool.query('SELECT * FROM products');
+      return { errors: [], value: result.rows };
+    } catch (err) {
+      return { errors: [err.message] };
+    }
+  },
 
-  findAll() {
-    return this.products;
-  }
+  async findOne(id) {
+    try {
+      const result = await pool.query('SELECT * FROM products WHERE id=$1', [id]);
+      return { errors: [], value: result.rows[0] };
+    } catch (err) {
+      return { errors: [err.message] };
+    }
+  },
 
-  findOne(id) {
-    return this.products.find(product => product.id === Number(id));
-  }
+  async update(id, data) {
+    if (data.id) {
+      return { errors: ['Updating "id" is not allowed'] };
+    }
+    const product = await this.findOne(id);
+    if (!product.value) {
+      return { errors: ['Product does not exist'] };
+    }
+    Object.assign(product.value, data);
+    const validatedProduct = Validation.validate(product.value);
+    if (validatedProduct.errors.length !== 0) {
+      return validatedProduct;
+    }
+    try {
+      const result = await pool.query(
+        'UPDATE products SET name=$1, price=$2, quantity_in_inventory=$3 WHERE ID=$4 RETURNING *',
+        [
+          validatedProduct.value.name,
+          validatedProduct.value.price,
+          validatedProduct.value.quantity_in_inventory,
+          validatedProduct.value.id,
+        ],
+      );
+      return { value: result.rows[0], errors: [] };
+    } catch (err) {
+      return { errors: [err] };
+    }
+  },
 
-  create(data) {
+  async create(data) {
     const validated = Validation.validate(data);
     if (validated.errors.length !== 0) {
       return validated;
     }
-    const { name, price, quantityInInventory } = validated.value;
-    const product = {
-      id: this.products.length + 1, name, price, quantityInInventory,
-    };
-    this.products.push(product);
-    validated.value = product;
-    return validated;
-  }
-}
-export default new Product();
+    const { name, price, quantity_in_inventory } = validated.value;
+    try {
+      const result = await pool.query(
+        'INSERT INTO products(name, price, quantity_in_inventory) VALUES($1, $2, $3) RETURNING id',
+        [name, price, quantity_in_inventory],
+      );
+      const product = {
+        id: result.rows[0].id, name, price, quantity_in_inventory,
+      };
+      validated.value = product;
+      return validated;
+    } catch (err) {
+      validated.errors.push(err.message);
+      return validated;
+    }
+  },
+  async deleteOne(id) {
+    try {
+      await pool.query('DELETE FROM products WHERE id=$1', [id]);
+      return { errors: [] };
+    } catch (err) {
+      return { errors: [err.message] };
+    }
+  },
+};
+export default Product;

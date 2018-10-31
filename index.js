@@ -2,11 +2,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import product from './server/src/routes/product-routes';
 import sale from './server/src/routes/sale-routes';
+import user from './server/src/routes/user-routes';
 
 const app = express();
 app.use(bodyParser.json());
 app.use('/api/v1/products', product);
 app.use('/api/v1/sales', sale);
+app.use('/api/v1/auth/signup', user);
 
 app.get('/api/v1', (req, res) => {
   res.status(200).send({ message: 'welcome to store manager' });
