@@ -13,7 +13,9 @@ describe('Product Model', () => {
         const persistedProducts = await ProductModel.findAll();
         expect(persistedProducts.errors).to.be.empty;
         expect(persistedProducts.value).to.not.be.empty;
-        const persistedProduct = persistedProducts.value.find(pProduct => pProduct.id === product.value.id);
+        const persistedProduct = persistedProducts
+          .value
+          .find(pProduct => pProduct.id === product.value.id);
         expect(persistedProduct.name).to.equal('fila jordan');
         expect(persistedProduct.price).to.equal(50000);
         expect(persistedProduct.quantity_in_inventory).to.equal(3);
@@ -62,7 +64,8 @@ describe('Product Model', () => {
           const product = await ProductModel.create(
             { name: 'nike jordan', price: 750, quantity_in_inventory: 5 },
           );
-          const updatedProduct = await ProductModel.update(product.value.id, { quantity_in_inventory: 10 });
+          const updatedProduct = await ProductModel
+            .update(product.value.id, { quantity_in_inventory: 10 });
           expect(updatedProduct.errors.length).to.equal(0);
           expect(updatedProduct.value.id).to.equal(product.value.id);
           expect(updatedProduct.value.quantity_in_inventory).to.equal(10);
@@ -124,7 +127,8 @@ describe('Product Model', () => {
           const product = await ProductModel.create(
             { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
           );
-          const updatedProduct = await ProductModel.update(product.value.id, { quantity_in_inventory: 0 });
+          const updatedProduct = await ProductModel
+            .update(product.value.id, { quantity_in_inventory: 0 });
           expect(updatedProduct.errors.length).to.be.greaterThan(0);
           done();
         } catch (err) {

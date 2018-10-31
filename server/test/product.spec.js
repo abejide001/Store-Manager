@@ -44,7 +44,7 @@ describe('PUT /products/:id', () => {
       );
       chai.request(server)
         .put(`/api/v1/products/${product.value.id}`)
-        .send({ name: 'fila fubu', price: 55000, quantity_in_inventory: 5, })
+        .send({ name: 'fila fubu', price: 55000, quantity_in_inventory: 5 })
         .end((err, res) => {
           expect(res.status).to.equal(201);
           expect(res.body.value.name).to.equal('fila fubu');
