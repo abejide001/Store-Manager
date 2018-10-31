@@ -1,11 +1,35 @@
 import Helper from '../helper/hashToken';
-import User from '../models/User';
+import pool from '../../db-config/database_connection';
 
-const Users = {
+const User = {
   async register(req, res) {
-    const users = await User.create(req.body);
-    const token = Helper.generateToken(users[0].id);
-    return res.header('x-auth-token', token).status(201).send(users);
+    if (!req.body.email || !req.body.password) {
+      return res.status(400).send({ message: 'Some values are missing' });
+    }
+    // if (!Helper.isValidEmail(req.body.email)) {
+    //   return res.status(400).send({ message: 'Please enter a valid email address' });
+    // }
+    const hashPassword = Helper.hashPassword(req.body.password);
+    const createQuery = `INSERT INTO
+      users(email, password, fullname, username)
+      VALUES($1, $2, $3, $4)
+      returning *`;
+    const values = [
+      req.body.email,
+      hashPassword,
+      req.body.fullname,
+      req.body.username,
+    ];
+    try {
+      const { rows } = await pool.query(createQuery, values);
+      const token = Helper.generateToken(rows[0].id);
+      return res.status(201).send({ token });
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return res.status(400).send({ message: 'User with that EMAIL already exist' });
+      }
+      return res.status(400).send(error.message);
+    }
   },
 };
-export default Users;
+export default User;
