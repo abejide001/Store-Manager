@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/api/v1/products', product);
 app.use('/api/v1/sales', sale);
-app.use('/api/v1/auth/signup', user);
+app.use('/api/v1/auth', user);
 
 app.get('/api/v1', (req, res) => {
   res.status(200).send({ message: 'welcome to store manager' });
