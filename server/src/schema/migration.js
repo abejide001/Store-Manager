@@ -30,8 +30,7 @@ CREATE TABLE IF NOT EXISTS users(
     fullname VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     username VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    role VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL
 );
       `);
   },
