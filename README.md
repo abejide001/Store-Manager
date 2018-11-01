@@ -27,7 +27,8 @@ $ cd Store-Manager
 # rename .env.sample to .env, and set your environment variables
 
 $ npm i
-$npm run db:
+$ npm run db:create
+$ npm run db:migrate
 $ npm start
 ```
 
