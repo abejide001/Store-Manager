@@ -2,8 +2,12 @@
 #login-area {
   min-height: 510px;
   font-family: "K2D", sans-serif;
+  flex: 1;
 }
-
+.login-showcase {
+  display:  flex;
+  flex-direction: column;
+}
 .login-box {
   width: 280px;
   position: absolute;

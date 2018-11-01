@@ -2,8 +2,12 @@
 #register-area {
   min-height: 510px;
   font-family: "K2D", sans-serif;
+  flex: 1;
 }
-
+.register-showcase {
+  display:  flex;
+  flex-direction: column;
+}
 .register-box {
   width: 280px;
   position: absolute;
