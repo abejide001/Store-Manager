@@ -27,6 +27,7 @@ $ cd Store-Manager
 # rename .env.sample to .env, and set your environment variables
 
 $ npm i
+$npm run db:
 $ npm start
 ```
 
@@ -88,6 +89,10 @@ API BASE URL https://store-manager-store.herokuapp.com/api/v1. It's recommended 
   password: "abcde"
 }
 ```
+## API Docs
+https://storemanager15.docs.apiary.io/
+## UI Template
+abejide001.github.io/Store-Manager/UI
 ## Author
 Abejide Femi
 ## Acknowledgements
