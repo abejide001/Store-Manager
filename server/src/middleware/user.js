@@ -39,7 +39,7 @@ export default {
       });
       return;
     }
-    if (role !== 'admin' || role !== 'user') {
+    if (role !== 'admin' && role !== 'user') {
       res.status(400).send({
         message: 'Role can either be admin or user',
       });
