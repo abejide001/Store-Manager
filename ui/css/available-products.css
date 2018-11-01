@@ -110,7 +110,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 879px) {
   .products .product-item {
     float: none;
     width: 100%;
