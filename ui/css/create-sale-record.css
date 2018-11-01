@@ -31,7 +31,8 @@ input {
   background: gray;
   padding: 0.5rem;
   color: white;
-  margin: 1rem 0;
+  margin: 10px;
   width: auto;
   cursor: pointer;
+  line-height: 25px;
 }

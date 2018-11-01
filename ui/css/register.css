@@ -41,4 +41,30 @@
   width: 40px;
   float: left;
   text-align: center;
+  font-size: 24px;
+}
+@media (max-width: 348px) {
+  .register-box h1 {
+    font-size: 25px;
+  }
+  .register-box {
+    margin-top: 250px;
+  }
+}
+@media (max-width: 769px) {
+  .register-box h1 {
+    font-size: 25px;
+    text-align: center;
+  }
+  .register-box {
+    margin-top: 230px;
+  }
+  #register-area {
+    min-height: 850px;
+  }
+}
+@media (max-width: 1024px) {
+  #register-area {
+    background-color: red;
+  }
 }
