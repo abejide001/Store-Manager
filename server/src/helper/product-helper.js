@@ -4,8 +4,8 @@ const Validation = {
       validatedProduct.errors.push('"name" is required');
       return validatedProduct;
     }
-    if (validatedProduct.value.name.length < 5) {
-      validatedProduct.errors.push('"name" length must be at least 5 characters long');
+    if (validatedProduct.value.name.length < 1) {
+      validatedProduct.errors.push('"name" length must be at least 1 characters long');
     }
     if (validatedProduct.value.name.length > 15) {
       validatedProduct.errors.push('"name" length must be at most 15 characters long');

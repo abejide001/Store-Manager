@@ -2,8 +2,8 @@ import Helper from '../helper/hashToken';
 import pool from '../../db-config/database_connection';
 import Validation from '../helper/user-helper';
 
-const User = {
-  async register(req, res) {
+class User {
+  static async register(req, res) {
     if (!Validation.isValidEmail(req.body.email)) {
       return res.status(400).send({ message: 'Please enter a valid email address' });
     }
@@ -30,9 +30,9 @@ const User = {
       }
       return res.status(400).send(error.message);
     }
-  },
+  }
 
-  async login(req, res) {
+  static async login(req, res) {
     if (!Validation.isValidEmail(req.body.email)) {
       return res.status(400).send({ message: 'Please enter a valid email address' });
     }
@@ -50,6 +50,6 @@ const User = {
     } catch (error) {
       return res.status(400).send(error.message);
     }
-  },
-};
+  }
+}
 export default User;
