@@ -59,4 +59,12 @@
   .register-box {
     margin-top: 230px;
   }
+  #register-area {
+    min-height: 850px;
+  }
+}
+@media (max-width: 1024px) {
+  #register-area {
+    background-color: red;
+  }
 }

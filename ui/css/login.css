@@ -60,4 +60,7 @@
   .login-box {
     margin-top: 150px;
   }
+  #login-area  {
+    min-height: 850px;
+  }
 }
