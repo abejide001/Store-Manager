@@ -61,10 +61,10 @@ API BASE URL https://store-manager-store.herokuapp.com/api/v1. It's recommended 
 
 ### Authentication endpoints `/api/v1/auth`
 
-| method | route        | description               | data                                    |
-| ------ | ------------ | ------------------------- | ----------------------------------------|
-| POST   | /auth/sigin  | Sign In                   | `{email, password}`                     |
-| POST   | /auth/signup | Sign up                   | `{fullname, username, email, password}` |
+| method | route        | description               | data                                          |
+| ------ | ------------ | ------------------------- | ----------------------------------------------|
+| POST   | /auth/sigin  | Sign In                   | `{email, password}`                           |
+| POST   | /auth/signup | Sign up                   | `{fullname, username, email, password, role}` |
 ### Admin only endpoints 
 
 | method | route            | description               | 
