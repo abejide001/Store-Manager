@@ -4,9 +4,6 @@ import Validation from '../helper/user-helper';
 
 const User = {
   async register(req, res) {
-    if (!req.body.email || !req.body.password) {
-      return res.status(400).send({ message: 'Some values are missing' });
-    }
     if (!Validation.isValidEmail(req.body.email)) {
       return res.status(400).send({ message: 'Please enter a valid email address' });
     }
@@ -36,9 +33,6 @@ const User = {
   },
 
   async login(req, res) {
-    if (!req.body.email || !req.body.password) {
-      return res.status(400).send({ message: 'Some values are missing' });
-    }
     if (!Validation.isValidEmail(req.body.email)) {
       return res.status(400).send({ message: 'Please enter a valid email address' });
     }
