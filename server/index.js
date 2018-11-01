@@ -6,6 +6,7 @@ import user from './src/routes/user-routes';
 
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/v1/products', product);
 app.use('/api/v1/sales', sale);
 app.use('/api/v1/auth', user);
