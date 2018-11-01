@@ -4,7 +4,7 @@
   "description": "Store Manager is a web application that helps store owners manage sales and product inventory records. This application is meant for use in a single store",
   "main": "index.js",
   "scripts": {
-    "start": "babel-watch index.js",
+    "start": "babel-watch ./server/index.js",
     "test:db-create": "createdb -U postgres store_manager_db_test",
     "test:db-drop": "dropdb --if-exists -U postgres store_manager_db_test",
     "seed": "babel-node server/src/schema/seeds.js",
