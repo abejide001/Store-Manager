@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../../index';
+import server from '../index';
 import ProductModel from '../src/models/Product';
 
 chai.use(chaiHttp);
