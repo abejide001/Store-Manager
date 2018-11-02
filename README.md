@@ -72,9 +72,11 @@ API BASE URL https://store-manager-store.herokuapp.com/api/v1. It's recommended 
 | method | route            | description               | 
 | ------ | -----------------| ------------------------- |
 | POST   | /auth/signup     | Sign up                   |
+| PUT    | /api/auth/:id    | Edit a user               |
 | POST   | /api/products    | Create Product            |
 | PUT    | /api/products/:id| Modify a Product          |
 | DELETE | /api/products/:id| Delete a product          |
+
 
 
 ```javascript
