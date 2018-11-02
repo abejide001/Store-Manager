@@ -46,7 +46,7 @@ class User {
         return res.status(400).send({ message: 'The credentials you provided is incorrect' });
       }
       const token = Helper.generateToken(rows[0].role);
-      return res.status(200).send({ token });
+      return res.status(200).json({ message: 'successfully logged in', token });
     } catch (error) {
       return res.status(400).send(error.message);
     }
