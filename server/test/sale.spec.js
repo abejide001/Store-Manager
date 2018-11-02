@@ -13,6 +13,8 @@ describe('GET /sales', () => {
       .end((err, res) => {
         expect(res.status).to.equal(400);
         expect(res.body).to.not.be.empty;
+        expect(res.body).to.exist;
+        expect(res.body.message).to.equal('Token is not provided');
         done(err);
       });
   });
