@@ -103,7 +103,7 @@ footer {
     rgb(73, 74, 76),
     rgb(181, 189, 201)
   );
-  min-height: 95px;
+  min-height: 65px;
 }
 
 footer h3 {
@@ -127,6 +127,7 @@ footer h3 {
   }
   #showcase  {
     min-height: 850px;
+    margin-top:30px;
   }
   #showcase h1 {
     font-size: 60px;

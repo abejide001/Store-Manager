@@ -4,6 +4,12 @@
   font-family: "K2D", sans-serif;
   flex: 1;
 }
+.register-body {
+  position: absolute;
+  width: 100%;
+  top:0;
+  bottom: 0;
+}
 .register-showcase {
   display:  flex;
   flex-direction: column;
