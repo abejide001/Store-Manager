@@ -1,37 +1,42 @@
 import ProductModel from '../models/Product';
 
-const Product = {
-  async getAllProducts(req, res) {
+class Product {
+  static async getAllProducts(req, res) {
     const products = await ProductModel.findAll();
-    return res.status(200).send(products);
-  },
-  async getOneProduct(req, res) {
+    return res.status(200).json(products);
+  }
+
+  static async getOneProduct(req, res) {
     const { id } = req.params;
     const product = await ProductModel.findOne(id);
     if (!product.value) {
-      return res.status(404).send({ message: 'product not found' });
+      return res.status(404).json({ message: 'product not found' });
     }
     return res.send(product);
-  },
-  async createProduct(req, res) {
+  }
+
+  static async createProduct(req, res) {
     const newProduct = await ProductModel.create(req.body);
     if (newProduct.errors.length !== 0) {
-      res.status(400).send(newProduct);
+      res.status(400).json(newProduct);
       return;
     }
     res.status(201).send({
+      success: true,
       message: 'product created',
       newProduct,
     });
-  },
-  async deleteOneProduct(req, res) {
+  }
+
+  static async deleteOneProduct(req, res) {
     const { id } = req.params;
     await ProductModel.deleteOne(id);
-    res.status(201).send({
+    res.status(200).json({
       message: 'deleted',
     });
-  },
-  async updateProduct(req, res) {
+  }
+
+  static async updateProduct(req, res) {
     const { id } = req.params;
     const updatedProduct = await ProductModel.update(id, req.body);
     if (updatedProduct.errors.length !== 0) {
@@ -42,7 +47,7 @@ const Product = {
       res.status(400).send(updatedProduct);
       return;
     }
-    res.status(201).send(updatedProduct);
-  },
-};
+    res.status(200).send(updatedProduct);
+  }
+}
 export default Product;

@@ -112,7 +112,7 @@ describe('Product Model', () => {
           const product = await ProductModel.create(
             { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
           );
-          const updatedProduct = await ProductModel.update(product.value.id, { name: 'same' });
+          const updatedProduct = await ProductModel.update(product.value.id, { name: '' });
           expect(updatedProduct.errors.length).to.be.greaterThan(0);
           done();
         } catch (err) {
@@ -185,13 +185,13 @@ describe('Product Model', () => {
     it('should return errors for an invalid product name', (done) => {
       (async () => {
         const product = await ProductModel.create({
-          name: 'n',
+          name: '',
           price: 5000,
           quantity_in_inventory: 2,
         });
         expect(product.errors).to.not.be.empty;
         expect(product.errors.length).to.equal(1);
-        expect(product.errors[0]).to.equal('"name" length must be at least 5 characters long');
+        expect(product.errors[0]).to.equal('"name" is required');
         done();
       })();
     });
