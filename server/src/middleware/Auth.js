@@ -4,7 +4,7 @@ const Auth = {
   async verifyToken(req, res, next) {
     const token = req.headers['x-access-token'];
     if (!token) {
-      res.status(400).send({ message: 'Token is not provided' });
+      res.status(400).json({ status: 'error', message: 'Token is not provided' });
       return;
     }
     try {
@@ -12,12 +12,12 @@ const Auth = {
       req.user = decoded;
       next();
     } catch (error) {
-      res.status(400).send(error.message);
+      res.status(400).json(error.message);
     }
   },
   verifyAdmin(req, res, next) {
     if (req.user.userId !== 'admin') {
-      res.status(401).send('unauthorized');
+      res.status(401).json({ status: 'error', message: 'unathorized to visit this route' });
       return;
     }
     next();
