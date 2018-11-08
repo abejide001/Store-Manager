@@ -1,7 +1,17 @@
 #attendant-record {
   min-height: 510px;
 }
-
+.attendant-body {
+  position: absolute;
+  width: 100%;
+  top:0;
+  bottom: 0;
+}
+.attendant-showcase {
+  display:  flex;
+  flex-direction: column;
+  height: 100%;
+}
 #record-title h1 {
   text-align: center;
   font: normal bold 45px "K2D", sans-serif;

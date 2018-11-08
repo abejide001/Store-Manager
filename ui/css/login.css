@@ -1,9 +1,21 @@
+
 @import url("https://fonts.googleapis.com/css?family=Charmonman|Roboto|K2D");
 #login-area {
   min-height: 510px;
   font-family: "K2D", sans-serif;
+  flex: 1;
 }
-
+.login-showcase {
+  display:  flex;
+  flex-direction: column;
+  height: 100%;
+}
+.login-body {
+  position: absolute;
+  width: 100%;
+  top:0;
+  bottom: 0;
+}
 .login-box {
   width: 280px;
   position: absolute;
