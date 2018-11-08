@@ -5,12 +5,12 @@ import sale from './src/routes/sale-routes';
 import user from './src/routes/user-routes';
 
 const app = express();
+app.use(express.static('ui'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/v1/products', product);
 app.use('/api/v1/sales', sale);
 app.use('/api/v1/auth', user);
-
 app.get('/api/v1', (req, res) => {
   res.status(200).send({ message: 'welcome to store manager' });
 });
