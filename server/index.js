@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import product from './src/routes/product-routes';
 import sale from './src/routes/sale-routes';
 import user from './src/routes/user-routes';
 
 const app = express();
+app.use(cors());
 app.use(express.static('ui'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
