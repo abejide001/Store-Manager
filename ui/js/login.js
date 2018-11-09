@@ -3,7 +3,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const alert = document.querySelector('.alert');
 butt.addEventListener('submit', (e) => {
-  fetch('http://localhost:3000/api/v1/auth/signin', {
+  fetch('https://store-manager-store.herokuapp.com/api/v1/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ butt.addEventListener('submit', (e) => {
         alert.style.display = 'block';
         setTimeout(() => {
           alert.style.display = 'none';
-        }, 2000);
+        }, 3000);
       } else {
         localStorage.setItem('authToken', data.token);
         window.location.href = './admin.html ';
