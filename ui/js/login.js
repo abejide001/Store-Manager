@@ -3,7 +3,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const alert = document.querySelector('.alert');
 butt.addEventListener('submit', (e) => {
-  fetch('http://store-manager-store/api/v1/auth/signin', {
+  fetch('http://localhost:3000/api/v1/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
