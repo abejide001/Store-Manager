@@ -1,5 +1,5 @@
-const token = localStorage.getItem('authToken');
-
-if (!token) {
-  window.location = './login.html ';
+const tok = localStorage.getItem('authToken');
+const decoded = jwt_decode(tok);
+if (decoded.userId === 'user') {
+  window.location.replace('./attendant.html');
 }
