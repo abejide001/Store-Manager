@@ -3,7 +3,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const alert = document.querySelector('.alert');
 butt.addEventListener('submit', (e) => {
-  fetch('https://store-manager-store.herokuapp.com/api/v1/auth/signin', {
+  fetch('http://localhost:3000/api/v1/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -14,15 +14,17 @@ butt.addEventListener('submit', (e) => {
     .then((data) => {
       if (data.status === 'error') {
         document.querySelector('.inner').innerHTML = 'Wrong credentials';
-        alert.style.display = 'block';
+        alert.style.display = ' block';
         setTimeout(() => {
           alert.style.display = 'none';
         }, 3000);
       } else {
         localStorage.setItem('authToken', data.token);
-        window.location.href = './admin.html ';
+        const decoded = jwt_decode(data.token);
+        window.location = decoded.userId === 'admin' ? './admin.html' : 'attendant.html';
       }
     })
+    /* eslint-disable no-console */
     .catch(error => console.log(error.message));
   e.preventDefault();
 });

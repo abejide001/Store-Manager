@@ -9,9 +9,16 @@ if (!token) {
   login.innerHTML = `
      <a href="./login.html" id="logout">Logout</a>   
   `;
-  admin.innerHTML = `
+  const decoded = jwt_decode(token);
+  if (decoded.userId === 'admin') {
+    admin.innerHTML = `
      <a href="./admin.html">Admin</a>   
   `;
+  } else {
+    admin.innerHTML = `
+     <a href="./attendant.html">Attendant</a>   
+  `;
+  }
   document.getElementById('logout').addEventListener('click', () => {
     localStorage.removeItem('authToken');
   });
