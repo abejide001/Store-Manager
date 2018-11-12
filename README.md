@@ -96,6 +96,8 @@ API BASE URL https://store-manager-store.herokuapp.com/api/v1. It's recommended 
 https://storemanager15.docs.apiary.io/
 ## UI Template
 abejide001.github.io/Store-Manager/UI
+## App URL
+https://store-manager-store.herokuapp.com
 ## Author
 Abejide Femi
 ## Acknowledgements
