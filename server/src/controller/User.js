@@ -21,9 +21,9 @@ class User {
     ];
     try {
       const { rows } = await pool.query(createQuery, values);
-      const { id, email, username } = rows[0];
+      const { id, email, role } = rows[0];
       const token = Helper.generateToken(id);
-      return res.status(201).header('x-auth-token', token).json({ status: 'success', email, username });
+      return res.status(201).header('x-auth-token', token).json({ status: 'success', email, role });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({ status: 'error', message: 'User with that EMAIL already exist' });
