@@ -47,6 +47,19 @@ describe('LOGIN route', () => {
         done(err);
       });
   });
+  it('should return 400 if password is not valid', (done) => {
+    chai.request(server)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'abejidefemi@gmail.com',
+        password: 'aaaa',
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.message).to.exist;
+        done(err);
+      });
+  });
 });
 describe('REGISTER route', () => {
   it('should return 400 if token is not provided', (done) => {
