@@ -13,7 +13,7 @@ butt.addEventListener('submit', (e) => {
     .then(res => res.json())
     .then((data) => {
       if (data.status === 'error') {
-        document.querySelector('.inner').innerHTML = 'Wrong credentials';
+        document.querySelector('.inner').innerHTML = `${data.message}`;
         alert.style.display = ' block';
         setTimeout(() => {
           alert.style.display = 'none';
