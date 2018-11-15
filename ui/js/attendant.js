@@ -77,7 +77,7 @@ function addItemToCart(title, price, image) {
   cartRow.querySelectorAll('.btn-danger')[0].addEventListener('click', removeProduct);
   cartRow.querySelectorAll('.cart-quantity-input')[0].addEventListener('change', quantityChanged);
 }
-fetch('http://store-manager-store.herokuapp.com/api/v1/products', {
+fetch('https://store-manager-store.herokuapp.com/api/v1/products', {
   headers: {
     'x-access-token': token,
   },
