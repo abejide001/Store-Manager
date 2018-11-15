@@ -8,7 +8,7 @@ describe('Product Model', () => {
     it('should retrieve products', (done) => {
       (async () => {
         const product = await ProductModel.create(
-          { name: 'fila jordan', price: 50000, quantity_in_inventory: 3 },
+          { name: 'fila jordan', price: 50000, quantity_in_inventory: 3, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
         );
         const persistedProducts = await ProductModel.findAll();
         expect(persistedProducts.errors).to.be.empty;
@@ -19,6 +19,7 @@ describe('Product Model', () => {
         expect(persistedProduct.name).to.equal('fila jordan');
         expect(persistedProduct.price).to.equal(50000);
         expect(persistedProduct.quantity_in_inventory).to.equal(3);
+        expect(persistedProduct.product_image).to.equal('https://i.imgur.com/V0qHM1d.jpg');
         done();
       })();
     });
@@ -28,7 +29,7 @@ describe('Product Model', () => {
       (async () => {
         try {
           const product = await ProductModel.create(
-            { name: 'nike ordan', price: 700, quantity_in_inventory: 5 },
+            { name: 'nike ordan', price: 700, quantity_in_inventory: 5, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const updatedProduct = await ProductModel.update(product.value.id, { name: 'nike jordan' });
           expect(updatedProduct.errors.length).to.equal(0);
@@ -45,7 +46,7 @@ describe('Product Model', () => {
       (async () => {
         try {
           const product = await ProductModel.create(
-            { name: 'nike jordan', price: 750, quantity_in_inventory: 5 },
+            { name: 'nike jordan', price: 750, quantity_in_inventory: 5, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const updatedProduct = await ProductModel.update(product.value.id, { price: 800 });
           expect(updatedProduct.errors.length).to.equal(0);
@@ -62,7 +63,7 @@ describe('Product Model', () => {
       (async () => {
         try {
           const product = await ProductModel.create(
-            { name: 'nike jordan', price: 750, quantity_in_inventory: 5 },
+            { name: 'nike jordan', price: 750, quantity_in_inventory: 5, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const updatedProduct = await ProductModel
             .update(product.value.id, { quantity_in_inventory: 10 });
@@ -75,12 +76,29 @@ describe('Product Model', () => {
         }
       })();
     });
+    it('should update the product image', (done) => {
+      (async () => {
+        try {
+          const product = await ProductModel.create(
+            { name: 'nike jordan', price: 750, quantity_in_inventory: 5, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
+          );
+          const updatedProduct = await ProductModel
+            .update(product.value.id, { product_image: 'https://i.imgur.com/V0qHM1e.jpg' });
+          expect(updatedProduct.errors.length).to.equal(0);
+          expect(updatedProduct.value.id).to.equal(product.value.id);
+          expect(updatedProduct.value.product_image).to.equal('https://i.imgur.com/V0qHM1e.jpg');
+          done();
+        } catch (err) {
+          done(err);
+        }
+      })();
+    });
 
     it('should not update the product id', (done) => {
       (async () => {
         try {
           const product = await ProductModel.create(
-            { name: 'nike jordan', price: 750, quantity_in_inventory: 5 },
+            { name: 'nike jordan', price: 750, quantity_in_inventory: 5, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const updatedProduct = await ProductModel.update(product.value.id, { id: 1000 });
           expect(updatedProduct.errors.length).to.be.greaterThan(0);
@@ -95,7 +113,7 @@ describe('Product Model', () => {
       (async () => {
         try {
           const product = await ProductModel.create(
-            { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const updatedProduct = await ProductModel.update(product.value.id, { price: 0 });
           expect(updatedProduct.errors.length).to.be.greaterThan(0);
@@ -110,7 +128,7 @@ describe('Product Model', () => {
       (async () => {
         try {
           const product = await ProductModel.create(
-            { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const updatedProduct = await ProductModel.update(product.value.id, { name: '' });
           expect(updatedProduct.errors.length).to.be.greaterThan(0);
@@ -125,7 +143,7 @@ describe('Product Model', () => {
       (async () => {
         try {
           const product = await ProductModel.create(
-            { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const updatedProduct = await ProductModel
             .update(product.value.id, { quantity_in_inventory: 0 });
@@ -141,7 +159,7 @@ describe('Product Model', () => {
       (async () => {
         try {
           await ProductModel.create(
-            { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
+            { name: 'some shoe', price: 50000, quantity_in_inventory: 3, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
           );
           const persistedProducts = await ProductModel.findAll();
           const count = persistedProducts.value.length - 1;
@@ -161,7 +179,7 @@ describe('Product Model', () => {
     it('should persist the product', (done) => {
       (async () => {
         const product = await ProductModel.create(
-          { name: 'nike jordan', price: 10000, quantity_in_inventory: 2 },
+          { name: 'nike jordan', price: 10000, quantity_in_inventory: 2, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
         );
         expect(product.errors.length).to.equal(0);
         expect(product.value.id).to.be.greaterThan(0); // means we created the entry
@@ -174,6 +192,7 @@ describe('Product Model', () => {
           name: 'nike jordan',
           price: 1000,
           quantity_in_inventory: 2,
+          product_image: 'https://i.imgur.com/V0qHM1d.jpg',
         });
         if (product.errors.length > 0) {
           done(new Error(product.errors));
@@ -188,6 +207,7 @@ describe('Product Model', () => {
           name: '',
           price: 5000,
           quantity_in_inventory: 2,
+          product_image: 'https://i.imgur.com/V0qHM1d.jpg',
         });
         expect(product.errors).to.not.be.empty;
         expect(product.errors.length).to.equal(1);
@@ -201,6 +221,7 @@ describe('Product Model', () => {
           name: 'air storm',
           price: 0,
           quantity_in_inventory: 2,
+          product_image: 'https://i.imgur.com/V0qHM1d.jpg',
         });
         expect(product.errors).to.not.be.empty;
         expect(product.errors.length).to.equal(1);
@@ -215,7 +236,7 @@ describe('Delete product model', () => {
     (async () => {
       try {
         const product = await ProductModel.create(
-          { name: 'some shoe', price: 50000, quantity_in_inventory: 3 },
+          { name: 'some shoe', price: 50000, quantity_in_inventory: 3, product_image: 'https://i.imgur.com/V0qHM1d.jpg' },
         );
         const deleteProduct = await ProductModel.deleteOne(product.value.id);
         expect(deleteProduct.errors).to.be.empty;
