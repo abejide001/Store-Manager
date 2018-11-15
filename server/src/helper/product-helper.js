@@ -32,6 +32,16 @@ const Validation = {
     }
     return validatedProduct;
   },
+  validateProductImage(validatedProduct) {
+    if (!validatedProduct.value.product_image) {
+      validatedProduct.errors.push('"product_image" is required');
+      return validatedProduct;
+    }
+    if (typeof validatedProduct.value.product_image !== 'string') {
+      validatedProduct.errors.push('"product_image" should be a string');
+    }
+    return validatedProduct;
+  },
   validate(product) {
     const validatedProduct = {};
     validatedProduct.errors = [];
@@ -39,6 +49,7 @@ const Validation = {
     this.validateName(validatedProduct);
     this.validatePrice(validatedProduct);
     this.validateQuantityInInventory(validatedProduct);
+    this.validateProductImage(validatedProduct);
     return validatedProduct;
   },
 };
