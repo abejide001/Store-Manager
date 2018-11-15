@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS products(
     id SERIAL PRIMARY KEY,
     name VARCHAR(40) NOT NULL,
     price INTEGER NOT NULL,
-    quantity_in_inventory INTEGER NOT NULL
+    quantity_in_inventory INTEGER NOT NULL,
+    product_image VARCHAR(40) NOT NULL
 );
       `);
 
