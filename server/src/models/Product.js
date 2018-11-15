@@ -36,11 +36,12 @@ const Product = {
     }
     try {
       const result = await pool.query(
-        'UPDATE products SET name=$1, price=$2, quantity_in_inventory=$3 WHERE ID=$4 RETURNING *',
+        'UPDATE products SET name=$1, price=$2, quantity_in_inventory=$3, product_image=$4 WHERE ID=$5 RETURNING *',
         [
           validatedProduct.value.name,
           validatedProduct.value.price,
           validatedProduct.value.quantity_in_inventory,
+          validatedProduct.value.product_image,
           validatedProduct.value.id,
         ],
       );
@@ -55,14 +56,16 @@ const Product = {
     if (validated.errors.length !== 0) {
       return validated;
     }
-    const { name, price, quantity_in_inventory } = validated.value;
+    const {
+      name, price, quantity_in_inventory, product_image,
+    } = validated.value;
     try {
       const result = await pool.query(
-        'INSERT INTO products(name, price, quantity_in_inventory) VALUES($1, $2, $3) RETURNING id',
-        [name, price, quantity_in_inventory],
+        'INSERT INTO products(name, price, quantity_in_inventory, product_image) VALUES($1, $2, $3, $4) RETURNING id',
+        [name, price, quantity_in_inventory, product_image],
       );
       const product = {
-        id: result.rows[0].id, name, price, quantity_in_inventory,
+        id: result.rows[0].id, name, price, quantity_in_inventory, product_image,
       };
       validated.value = product;
       return validated;
