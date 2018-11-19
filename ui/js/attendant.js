@@ -1,6 +1,5 @@
 // Assign selectors
 const removeButton = document.querySelectorAll('.btn-danger'),
-  addToCart = document.querySelectorAll('.product-button'),
   quantityInput = document.querySelectorAll('.cart-quantity-input'),
   token = localStorage.getItem('authToken');
 if (document.readyState === 'loading') {
@@ -11,7 +10,6 @@ if (document.readyState === 'loading') {
 
 function ready() {
   removeButton.forEach(button => button.addEventListener('click', removeProduct));
-  addToCart.forEach(item => item.addEventListener('click', addToCartButton));
   quantityInput.forEach(input => input.addEventListener('change', quantityChanged));
 }
 
@@ -99,4 +97,6 @@ fetch('https://store-manager-store.herokuapp.com/api/v1/products', {
     `;
     });
     document.querySelector('.products').innerHTML = output;
+    const addToCart = document.querySelectorAll('.product-button');
+    addToCart.forEach(item => item.addEventListener('click', addToCartButton));
   });
