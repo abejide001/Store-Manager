@@ -2,7 +2,8 @@
 /* product area */
 
 #product-area {
-    min-height: 510px;
+    min-height: 700px;
+    flex: 1;
 }
 
 #product-area h1 {

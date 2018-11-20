@@ -1,8 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Charmonman|Roboto|K2D");
 /* records */
-
+.sale-body {
+  position: absolute;
+  width: 100%;
+  top:0;
+  bottom: 0;
+}
+.sale-showcase {
+  display:  flex;
+  flex-direction: column;
+  height: 100%;
+}
 #records {
   min-height: 510px;
+  flex: 1;
 }
 #record-table {
   overflow-x: auto;
