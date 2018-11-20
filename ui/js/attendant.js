@@ -2,6 +2,7 @@
 const removeButton = document.querySelectorAll('.btn-danger'),
   quantityInput = document.querySelectorAll('.cart-quantity-input'),
   token = localStorage.getItem('authToken');
+  
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', ready);
 } else {
@@ -84,6 +85,11 @@ fetch('https://store-manager-store.herokuapp.com/api/v1/products', {
   .then((data) => {
     let output = '';
     const items = data.products.value;
+    if (items.length === 0) {
+      document.querySelector('.products').innerHTML = `
+        <h1>No products available</h1>
+      `;
+    }
     items.forEach((item) => {
       output += `
      <div class="product">
