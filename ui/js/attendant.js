@@ -2,7 +2,6 @@
 const removeButton = document.querySelectorAll('.btn-danger'),
   quantityInput = document.querySelectorAll('.cart-quantity-input'),
   token = localStorage.getItem('authToken');
-  
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', ready);
 } else {
@@ -76,6 +75,7 @@ function addItemToCart(title, price, image) {
   cartRow.querySelectorAll('.btn-danger')[0].addEventListener('click', removeProduct);
   cartRow.querySelectorAll('.cart-quantity-input')[0].addEventListener('change', quantityChanged);
 }
+/** Get Products */
 fetch('https://store-manager-store.herokuapp.com/api/v1/products', {
   headers: {
     'x-access-token': token,
@@ -106,3 +106,20 @@ fetch('https://store-manager-store.herokuapp.com/api/v1/products', {
     const addToCart = document.querySelectorAll('.product-button');
     addToCart.forEach(item => item.addEventListener('click', addToCartButton));
   });
+/** Search for products */
+const searchProduct = document.getElementById('search');
+
+searchProduct.addEventListener('keyup', (e) => {
+  const a = e.target.value.toLowerCase();
+  const b = document.querySelectorAll('.product-name');
+  b.forEach((element) => {
+    const item = element.firstChild.textContent;
+    if (item.toLowerCase().indexOf(a) !== -1) {
+      element.style.display = 'block';
+      element.parentElement.style.display = 'block';
+    } else {
+      element.style.display = 'none';
+      element.parentElement.style.display = 'none';
+    }
+  });
+});
