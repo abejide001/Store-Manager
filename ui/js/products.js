@@ -20,7 +20,7 @@ fetch('https://store-manager-store.herokuapp.com/api/v1/products', {
       <p class="product-name">${item.name}</p>
       <p class="product-price">#${item.price.toLocaleString()}</p>
       <p>
-      <button class="editBtn" type="submit">Edit</button>
+      <a href="./edit-product.html?id=${item.id}"><button class="editBtn" type="submit">Edit</button></a>
       <button class="deleteBtn" type="submit" onclick=deleteProduct(${item.id})>Delete</button> 
       </p>
       </div>
