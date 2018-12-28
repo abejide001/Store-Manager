@@ -1,0 +1,14 @@
+{
+    "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+    "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
+    "diffEditor.renderIndicators": false,
+	"editor.insertSpaces": false,
+	"editor.accessibilitySupport": "off",
+	"editor.autoIndent": false,
+	"editor.detectIndentation": false,
+	"prettier.bracketSpacing": false,
+	"trailing-spaces.includeEmptyLines": false,
+	"prettier.semi": false,
+	"autoimport.useSemiColon": false,
+	"autoimport.semicolon": false
+}

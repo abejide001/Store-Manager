@@ -1,7 +1,14 @@
+import nodemailer from 'nodemailer';
+import sendgridTransport from 'nodemailer-sendgrid-transport'
 import Helper from '../helper/hashToken';
 import pool from '../../db-config/database_connection';
 import Validation from '../helper/user-helper';
 
+const client = nodemailer.createTransport(sendgridTransport({
+	auth: {
+		api_key: process.env.SEND_GRID
+	}
+}))
 class User {
   static async register(req, res) {
     if (!Validation.isValidEmail(req.body.email)) {
@@ -23,6 +30,21 @@ class User {
       const { rows } = await pool.query(createQuery, values);
       const { id, email, role } = rows[0];
       const token = Helper.generateToken(id);
+		const emailInfo = {
+		from: 'abejidefemi1@gmail.com',
+		to: req.body.email,
+		subject: 'Sign up Success',
+		text: 'Hello world',
+		html: '<b>Hello Sign up success</b>'
+		};
+		console.log(emailInfo)
+		client.sendMail(emailInfo, function(err, info){
+    if (err ) { 
+      console.log(error);
+    } else {
+      console.log('Message sent: ' + info.response);
+    }
+});
       return res.status(201).header('x-auth-token', token).json({ status: 'success', email, role });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
@@ -46,6 +68,21 @@ class User {
         return res.status(400).json({ status: 'error', message: 'The credentials you provided is incorrect' });
       }
       const token = Helper.generateToken(rows[0].role);
+	    const emailInfo = {
+		from: 'abejidefemi1@gmail.com',
+		to: req.body.email,
+		subject: 'Sign in',
+		text: 'Hello Sign in success',
+		html: '<b>Hello world</b>'
+		};
+		client.sendMail(emailInfo, function(err, info){
+        if (err) {
+        console.log(err);
+      }
+    else {
+      console.log('Message sent: ' + info.response);
+    }
+});
       return res.status(200).json({ status: 'success', message: 'successfully logged in', token });
     } catch (error) {
       return res.status(400).json(error.message);
