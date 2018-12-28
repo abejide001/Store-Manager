@@ -1,10 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv'
 import product from './src/routes/product-routes';
 import sale from './src/routes/sale-routes';
 import user from './src/routes/user-routes';
-
+dotenv.config()
 const app = express();
 app.use(cors());
 app.use(express.static('ui'));
