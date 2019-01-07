@@ -1,5 +1,5 @@
 # Store-Manager
-##### [![Build Status](https://travis-ci.org/abejide001/Store-Manager.svg?branch=develop)](https://travis-ci.org/abejide001/Store-Manager) [![Coverage Status](https://coveralls.io/repos/github/abejide001/Store-Manager/badge.svg?branch=develop)](https://coveralls.io/github/abejide001/Store-Manager?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/d32f77dfa95a6cff5083/maintainability)](https://codeclimate.com/github/abejide001/Store-Manager/maintainability)
+##### [![Build Status](https://travis-ci.org/abejide001/Store-Manager.svg?branch=develop)](https://travis-ci.org/abejide001/Store-Manager) [![Coverage Status](https://coveralls.io/repos/github/abejide001/Store-Manager/badge.svg?branch=develop)](https://coveralls.io/github/abejide001/Store-Manager?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/d32f77dfa95a6cff5083/maintainability)](https://codeclimate.com/github/abejide001/Store-Manager/maintainability) [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 Store Manager is a web application that helps store owners manage sales and product inventory records. This application is meant for use in a single store.
 
 ## Introduction
